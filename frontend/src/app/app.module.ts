@@ -11,12 +11,16 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/loginPage/login-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PlayerComponent } from './components/player/player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationPageComponent,
     LoginPageComponent,
+    HeaderComponent,
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
