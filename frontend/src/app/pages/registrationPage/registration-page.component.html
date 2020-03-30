@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form (ngSubmit)="onClickSubmit(regForm.value)" #regForm="ngForm">
+  <div class="registration-form">
+    <div class="registration-inputs">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name="name" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Surname</mat-label>
+        <input matInput name="surname" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput name="email" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nickname</mat-label>
+        <input matInput name="nickname" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" ngModel>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+</body>
+</html>
