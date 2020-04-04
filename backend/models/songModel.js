@@ -1,0 +1,3 @@
+function Song() {
+    this.name = '';
+}

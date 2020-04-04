@@ -17,6 +17,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+const searchRouter = require("./routers/searchRouter");
+
+app.use("/search", searchRouter);
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
     var connection = mysql.createConnection(config.config);
@@ -32,9 +36,8 @@ app.post('/registration', function(req, res) {
    console.log(req.body);
 });
 
-app.post('/search', function(req, res) {
-    console.log(req.body.searchText);
-    res.send({"your request":  req.body.searchText});
+app.use(function (req, res, next) {
+    res.status(404).send("Not Found")
 });
 
 app.listen(3000, function () {
