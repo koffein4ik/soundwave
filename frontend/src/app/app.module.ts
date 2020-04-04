@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/loginPage/login-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PlayerComponent } from './components/player/player.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PlayerComponent } from './components/player/player.component';
     LoginPageComponent,
     HeaderComponent,
     PlayerComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
