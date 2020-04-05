@@ -6,9 +6,16 @@ import { AppComponent } from './app.component';
 import {RegistrationPageComponent} from "./pages/registrationPage/registration-page.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSliderModule,
+  MatIconModule,
+  MatListModule,
+  MatToolbarModule,
+  MatCardModule
+} from "@angular/material";
 import {FormsModule} from "@angular/forms";
 import { LoginPageComponent } from './pages/loginPage/login-page.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -32,7 +39,12 @@ import { SearchComponent } from './components/search/search.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatSliderModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
