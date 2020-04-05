@@ -21,6 +21,10 @@ const searchRouter = require("./routers/searchRouter");
 
 app.use("/search", searchRouter);
 
+const songRouter = require("./routers/songRouter");
+
+app.use("/songs", songRouter);
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
     var connection = mysql.createConnection(config.config);
