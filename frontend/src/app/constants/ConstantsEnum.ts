@@ -2,5 +2,6 @@ export enum ConstantsEnum {
   backURL = "http://localhost:3000/",
   searchURL = "search",
   registrationURL = "registration",
-  loginURL = "login"
+  loginURL = "login",
+  userAPIURL = "user/"
 }

@@ -18,7 +18,7 @@ export class AuthService {
     return this.http.post(ConstantsEnum.backURL + ConstantsEnum.loginURL, userdata);
   }
 
-  public setToken(authData: {token: any, login: string, exp: string}): void {
+  public setToken(authData: {token: any, login: string, userId: string, exp: string}): void {
     const expiresAt = moment().add(authData.exp,'second');
     localStorage.setItem(this.localStorageToken, authData.token);
     localStorage.setItem(this.localStorageExpirationDate, JSON.stringify(expiresAt.valueOf()));
@@ -44,6 +44,6 @@ export class AuthService {
   }
 
   public test(): Observable<any> {
-    return this.http.get(ConstantsEnum.backURL + "authtest");
+    return this.http.get(ConstantsEnum.backURL + ConstantsEnum.userAPIURL + "authtest");
   }
 }

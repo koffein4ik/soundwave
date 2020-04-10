@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 const authService = require('./services/authService');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -31,17 +31,22 @@ app.get('/', function (req, res) {
     var connection = mysql.createConnection(config.config);
     connection.query("SELECT * FROM USER_ROLE", {}, function (err, results) {
         console.log(results);
-        results.map(function(value) {
+        results.map(function (value) {
             console.log(value.name);
         });
     });
     console.log(config);
 });
 
-app.get('/authtest', function(req, res) {
+app.use('/user', function (req, res, next) {
+    console.log('МИДЛВЭРЕ');
     if (authService.authenticate(req, res)) {
-        res.send({"ok": "OK"});
+        next();
     }
+});
+
+app.get('/user/authtest', function (req, res) {
+    res.send({"ok": "OK"});
 });
 
 app.use(function (req, res) {
