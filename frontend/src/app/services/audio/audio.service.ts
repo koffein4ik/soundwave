@@ -38,6 +38,10 @@ export class AudioService {
     return this.stateChange.asObservable();
   }
 
+  getVolume(): number {
+    return this.audioObj.volume;
+  }
+
   playStream(url) {
     return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }
@@ -56,6 +60,10 @@ export class AudioService {
 
   seekTo(seconds) {
     this.audioObj.currentTime = seconds;
+  }
+
+  seekVolumeTo(value) {
+    this.audioObj.volume = value;
   }
 
   formatTime(time: number, format: string = "HH:mm:ss") {

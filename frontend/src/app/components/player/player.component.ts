@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import { AudioService } from "../../services/audio/audio.service";
 import { StreamState } from "../../interfaces/stream-state";
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-player',
@@ -11,12 +12,14 @@ export class PlayerComponent {
 
   files: Array<any> = [
     {
+      image : "https://avatars.yandex.net/get-music-content/163479/44311ba4.a.9152807-1/200x200",
       url:
         "https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3",
       name: "Perfect",
       artist: " Ed Sheeran"
     },
     {
+      image : null,
       url:
         "http://localhost:3000/songs/tetssong.mp3",
       name: "Loly bomp",
@@ -25,6 +28,7 @@ export class PlayerComponent {
   ];
   state: StreamState;
   currentFile: any = {};
+  isVolumeChanging: string = "hidden";
 
   constructor(
     public audioService: AudioService,
@@ -34,8 +38,20 @@ export class PlayerComponent {
       this.state = state;
     });
 
+    this.audioService.seekVolumeTo(0.3);
   }
 
+  @HostListener('document:keydown.space') 
+  spaceHandler(event: KeyboardEvent) {  
+    if(this.state.playing)
+      this.pause()
+    else
+    {
+      if(!this.state.error)
+        this.play()
+    } 
+  }
+  
   isFirstPlaying() {
     return this.currentFile.index === 0;
   }
@@ -87,4 +103,14 @@ export class PlayerComponent {
   onSliderChangeEnd(change) {
     this.audioService.seekTo(change.value);
   }
+
+  onVolumeSliderChangeEnd(change) {
+    this.audioService.seekVolumeTo(change.value * change.value);
+  }
+
+  onChangeVolume()
+  {
+    this.isVolumeChanging = this.isVolumeChanging == "hidden" ? "visible" : "hidden";
+  }
+
 }
