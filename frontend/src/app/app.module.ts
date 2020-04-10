@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {RegistrationPageComponent} from "./pages/registrationPage/registration-page.component";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {
   MatFormFieldModule,
   MatInputModule,
@@ -17,10 +17,11 @@ import {
   MatCardModule
 } from "@angular/material";
 import {FormsModule} from "@angular/forms";
-import { LoginPageComponent } from './pages/loginPage/login-page.component';
-import { HeaderComponent } from './components/header/header.component';
-import { PlayerComponent } from './components/player/player.component';
-import { SearchComponent } from './components/search/search.component';
+import {LoginPageComponent} from './pages/loginPage/login-page.component';
+import {HeaderComponent} from './components/header/header.component';
+import {PlayerComponent} from './components/player/player.component';
+import {SearchComponent} from './components/search/search.component';
+import {AuthInterceptor} from "./interceptors/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,14 @@ import { SearchComponent } from './components/search/search.component';
     MatToolbarModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

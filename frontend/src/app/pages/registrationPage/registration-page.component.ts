@@ -10,9 +10,12 @@ import {RegistrationModel} from "../../models/registration.model";
 export class RegistrationPageComponent {
   constructor(private regService: RegistrationService) {}
 
+  public registrationSuccess: boolean = false;
+
   public onClickSubmit(regData: RegistrationModel): void {
-    this.regService.register(regData).subscribe();
-    console.log(regData);
+    this.regService.register(regData).subscribe((data: any) => {
+      this.registrationSuccess = data.result === "SUCCESS";
+    });
   }
 
 

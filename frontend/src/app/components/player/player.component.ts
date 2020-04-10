@@ -7,7 +7,7 @@ import { StreamState } from "../../interfaces/stream-state";
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.less']
 })
-export class PlayerComponent{
+export class PlayerComponent {
 
   files: Array<any> = [
     {
@@ -34,9 +34,6 @@ export class PlayerComponent{
       this.state = state;
     });
 
-  }
-
-  ngOnInit() {
   }
 
   isFirstPlaying() {
@@ -70,7 +67,7 @@ export class PlayerComponent{
     else
       this.audioService.play();
   }
-  
+
   stop() {
     this.audioService.stop();
   }
