@@ -37,12 +37,10 @@
             
             <div class="volume-control" >
               <button mat-button (click)="onChangeVolume()">
-                <mat-icon mat-list-icon *ngIf="volumeControl.value > 0.3">volume_up</mat-icon>
-                <mat-icon mat-list-icon *ngIf="volumeControl.value <= 0.3 && volumeControl.value > 0">volume_down</mat-icon>
-                <mat-icon mat-list-icon *ngIf="volumeControl.value == 0">volume_mute</mat-icon>
+                <mat-icon mat-list-icon>{{volumeIcon}}</mat-icon>
               </button>
               <div class="vol-picker" [style.visibility]="isVolumeChanging">
-                <mat-slider min="0" max="1" step="0.01" [value]="0.3" (input)="onVolumeSliderChangeEnd($event)" horizontal #volumeControl></mat-slider>
+                <mat-slider min="0" max="1" step="0.01" [value]="volume" (input)="onVolumeSliderChangeEnd($event)" horizontal #volumeControl></mat-slider>
               </div>
             </div>
 

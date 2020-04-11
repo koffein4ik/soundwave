@@ -49,29 +49,13 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   @Input()
   songPlaylistSize: number;
 
-  private clicks = new Subject();
-  private subscription: Subscription;
-
-  files: Array<any> = [
-    {
-      image : "https://avatars.yandex.net/get-music-content/163479/44311ba4.a.9152807-1/200x200",
-      url:
-        "https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3",
-      name: "Perfect",
-      artist: " Ed Sheeran"
-    },
-    {
-      image : null,
-      url:
-        "http://localhost:3000/songs/tetssong.mp3",
-      name: "Loly bomp",
-      artist: "Little big"
-    }
-  ];
-
   state: StreamState;
   currentFile: Song;
   isVolumeChanging: string = "hidden";
+  volume: number = 0.3;
+
+  private clicks = new Subject();
+  private subscription: Subscription;
 
   constructor(
     public audioService: AudioService,
@@ -80,19 +64,21 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       this.state = state;
     });
 
-    //TODO: save player volume in local storage and restore it
-    this.audioService.volume = 0.3;
+    this.volume = Number(localStorage.getItem("playerVolume") || 0.3);
+    this.audioService.volume =  this.volume * this.volume;
   }
 
   ngOnInit() {
     this.subscription = this.clicks.pipe(
-      throttleTime(300)
+      throttleTime(400)
     ).subscribe(e => this.toggleDrawer.emit());
 
     console.log("init");
   }
 
   ngOnDestroy() {
+    alert("destroy")
+    localStorage.setItem("playerVolume", this.volume.toString());
     this.subscription.unsubscribe();
   }
 
@@ -131,6 +117,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     return  (this.song && this.song.album && this.song.album.pictureURL) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
   }
 
+  get volumeIcon() : string {
+    if(this.volume > 0.3) return "volume_up";
+    if(this.volume <= 0.3 && this.volume > 0) return "volume_down";
+    return "volume_mute";
+  }
+
   isFirstPlaying() {
     return this.currentSongIndex === 0;
   }
@@ -141,7 +133,13 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   playStream(url) {
     this.audioService.stop();
-    this.audioService.playStream(url).subscribe(events => {});
+    this.audioService.playStream(url).subscribe((events : Event) => {
+      if(events.type == "ended")
+      {
+        if(!this.isLastPlaying())
+          this.next();
+      }
+    });
   }
 
   pause() {
@@ -178,6 +176,8 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   onVolumeSliderChangeEnd(change) {
+    this.volume = change.value;
+    localStorage.setItem("playerVolume", this.volume.toString());
     this.audioService.volume = change.value * change.value;
   }
 
