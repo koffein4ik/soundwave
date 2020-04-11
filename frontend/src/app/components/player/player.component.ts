@@ -23,10 +23,10 @@ import {Song} from "../../models/song.model";
 export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   @Output()
-  toggleDrawer = new EventEmitter<any>();
+  toggleDrawer = new EventEmitter<any>();//появляется плейлист
 
   @Output()
-  stopCurrentSong = new EventEmitter<any>();
+  stopCurrentSong = new EventEmitter<any>();//
 
   @Output()
   playCurrentSong = new EventEmitter<any>();
@@ -46,30 +46,6 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   private clicks = new Subject();
   private subscription: Subscription;
 
-  ngOnInit() {
-    this.subscription = this.clicks.pipe(
-      throttleTime(400)
-    ).subscribe(e => this.toggleDrawer.emit());
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.song) {
-      console.log('song changed or continued');
-    }
-    if (changes.currentSongStopped) {
-      console.log(changes.currentSongStopped);
-    }
-  }
-
-  public toggleClick(): void {
-    this.clicks.next();
-  }
-
-
   files: Array<any> = [
     {
       image : "https://avatars.yandex.net/get-music-content/163479/44311ba4.a.9152807-1/200x200",
@@ -86,6 +62,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       artist: "Little big"
     }
   ];
+
   state: StreamState;
   currentFile: any = {};
   isVolumeChanging: string = "hidden";
@@ -93,12 +70,36 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   constructor(
     public audioService: AudioService,
   ) {
-    // listen to stream state
     this.audioService.getState().subscribe(state => {
       this.state = state;
     });
 
-    this.audioService.seekVolumeTo(0.3);
+    //TODO: save player volume in local storage and restore it
+    this.audioService.volume = 0.3;
+  }
+
+  ngOnInit() {
+    this.subscription = this.clicks.pipe(
+      throttleTime(300)
+    ).subscribe(e => this.toggleDrawer.emit());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (changes.song) {
+      console.log('song changed or continued');
+    }
+    if (changes.currentSongStopped) {
+      console.log(changes.currentSongStopped);
+    }
+  }
+
+  public toggleClick(): void {
+    this.clicks.next();
   }
 
   @HostListener('document:keydown.space')
@@ -112,6 +113,10 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     }
   }
 
+  get songImage() : string {
+    return  (this.currentFile.file && this.currentFile.file.image) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
+  }
+  
   isFirstPlaying() {
     return this.currentFile.index === 0;
   }
@@ -121,9 +126,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   playStream(url) {
-    this.audioService.playStream(url).subscribe(events => {
-      // listening for fun here
-    });
+    this.audioService.playStream(url).subscribe(events => {});
   }
 
   openFile(file, index) {
@@ -134,6 +137,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   pause() {
     this.audioService.pause();
+    this.stopCurrentSong.emit();
   }
 
   play() {
@@ -142,22 +146,27 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       this.openFile(this.files[0], 0);
     else
       this.audioService.play();
+
+    this.playCurrentSong.emit();
   }
 
   stop() {
     this.audioService.stop();
+    this.stopCurrentSong.emit();
   }
 
   next() {
     const index = this.currentFile.index + 1;
     const file = this.files[index];
     this.openFile(file, index);
+    this.playNextSong.emit();
   }
 
   previous() {
     const index = this.currentFile.index - 1;
     const file = this.files[index];
     this.openFile(file, index);
+    this.playPreviousSong.emit();
   }
 
   onSliderChangeEnd(change) {
@@ -165,12 +174,19 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   onVolumeSliderChangeEnd(change) {
-    this.audioService.seekVolumeTo(change.value * change.value);
+    this.audioService.volume = change.value * change.value;
   }
 
-  onChangeVolume()
-  {
+  onChangeVolume() {
     this.isVolumeChanging = this.isVolumeChanging == "hidden" ? "visible" : "hidden";
   }
 
+  showCurrentPlaylist() {
+    this.clicks.next();
+    //TODO: SHOW CURRENT PLAYLIST
+  }
+
+  addToPlaylist() {
+    //TODO: SHOW USERS PLAYLIST AND ADD POSSIBILITY TO ADD SONGS TO THEM
+  }
 }
