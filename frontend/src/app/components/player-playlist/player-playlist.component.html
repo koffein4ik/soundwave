@@ -17,6 +17,8 @@
 </mat-drawer-container>
 <app-player (toggleDrawer)="toggleDrawer(drawer)"
             [song]="currentSongPlaying"
+            [songPlaylistSize]="playlistSongs.length"
+            [currentSongIndex]="playlistSongs.indexOf(currentSongPlaying)"
             (stopCurrentSong)="stopCurrentSong()"
             (playCurrentSong)="playCurrentSong()"
             [currentSongStopped]="currentSongStopped"

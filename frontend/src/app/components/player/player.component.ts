@@ -43,6 +43,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   @Input()
   currentSongStopped: boolean;
 
+  @Input()
+  currentSongIndex: number;
+
+  @Input()
+  songPlaylistSize: number;
+
   private clicks = new Subject();
   private subscription: Subscription;
 
@@ -116,7 +122,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   get songImage() : string {
     return  (this.currentFile.file && this.currentFile.file.image) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
   }
-  
+
   isFirstPlaying() {
     return this.currentFile.index === 0;
   }

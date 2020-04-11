@@ -23,7 +23,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -33,7 +33,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -43,7 +43,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -53,7 +53,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -63,7 +63,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -73,7 +73,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -83,7 +83,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     },
     {
       name: "test",
@@ -93,7 +93,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231
+      id: 231, songURL:""
     }
   ];
 
