@@ -22,6 +22,11 @@ import {HeaderComponent} from './components/header/header.component';
 import {PlayerComponent} from './components/player/player.component';
 import {SearchComponent} from './components/search/search.component';
 import {AuthInterceptor} from "./interceptors/auth-interceptor";
+import { PlayerPlaylistComponent } from './components/player-playlist/player-playlist.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import { PlaylistSongComponent } from './components/playlist-song/playlist-song.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +36,8 @@ import {AuthInterceptor} from "./interceptors/auth-interceptor";
     HeaderComponent,
     PlayerComponent,
     SearchComponent,
+    PlayerPlaylistComponent,
+    PlaylistSongComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,10 @@ import {AuthInterceptor} from "./interceptors/auth-interceptor";
     MatIconModule,
     MatListModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     {

@@ -27,7 +27,7 @@
         <span >
           {{currentFile?.file?.name}}
         </span>
-        
+
         <div class="volume-control">
           <button mat-button (click)="onChangeVolume()">
             <mat-icon mat-list-icon *ngIf="volumeControl.value > 0.3">volume_up</mat-icon>
@@ -42,3 +42,4 @@
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
+<button mat-raised-button (click)="toggleClick()">Toggle drawer from player</button>

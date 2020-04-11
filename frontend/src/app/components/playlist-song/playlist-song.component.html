@@ -1,0 +1,15 @@
+<div class="playlist-song-container">
+  <div class="playlist-song-content">
+    <div class="song-image-container">
+      <img [src]="song.album.pictureURL">
+    </div>
+    <div class="song-info-container">
+      <p>{{song.name}}</p>
+      <p>{{song.artist.name}}</p>
+      <button mat-raised-button (click)="playCurrentSong.emit()" *ngIf="currentSongStopped || currentSongPlaying !== song">Play</button>
+      <button mat-raised-button (click)="stopCurrentSong.emit()" *ngIf="!currentSongStopped && currentSongPlaying === song">Stop</button>
+      <p *ngIf="currentSongStopped || currentSongPlaying !== song">Stopped</p>
+      <p *ngIf="currentSongPlaying === song && !currentSongStopped">Playing</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<mat-drawer-container class="drawer-container" [hasBackdrop]="true">
+  <mat-drawer #drawer [mode]="'over'" [position]="'end'">
+    <div class="playlist-container">
+      <div *ngFor="let song of playlistSongs">
+        <app-playlist-song [song] = song
+                           (playCurrentSong)="changeCurrentSongPlaying(song)"
+                           (stopCurrentSong)="stopCurrentSong()"
+                           [currentSongStopped]="currentSongStopped"
+                           [currentSongPlaying]="currentSongPlaying">
+        </app-playlist-song>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-player (toggleDrawer)="toggleDrawer(drawer)"
+            [song]="currentSongPlaying"
+            (stopCurrentSong)="stopCurrentSong()"
+            (playCurrentSong)="playCurrentSong()"
+            [currentSongStopped]="currentSongStopped"
+            (playNextSong)="playNextSong()"
+            (playPreviousSong)="playPreviousSong()">
+</app-player>

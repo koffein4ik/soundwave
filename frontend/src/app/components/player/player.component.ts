@@ -1,14 +1,74 @@
-import { Component, HostListener } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from "@angular/core";
 import { AudioService } from "../../services/audio/audio.service";
 import { StreamState } from "../../interfaces/stream-state";
-import { style } from '@angular/animations';
+import {Subject, Subscription} from "rxjs";
+import {throttleTime} from "rxjs/operators";
+import {Song} from "../../models/song.model";
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.less']
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
+
+  @Output()
+  toggleDrawer = new EventEmitter<any>();
+
+  @Output()
+  stopCurrentSong = new EventEmitter<any>();
+
+  @Output()
+  playCurrentSong = new EventEmitter<any>();
+
+  @Output()
+  playNextSong = new EventEmitter<any>();
+
+  @Output()
+  playPreviousSong = new EventEmitter<any>();
+
+  @Input()
+  song: Song;
+
+  @Input()
+  currentSongStopped: boolean;
+
+  private clicks = new Subject();
+  private subscription: Subscription;
+
+  ngOnInit() {
+    this.subscription = this.clicks.pipe(
+      throttleTime(400)
+    ).subscribe(e => this.toggleDrawer.emit());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.song) {
+      console.log('song changed or continued');
+    }
+    if (changes.currentSongStopped) {
+      console.log(changes.currentSongStopped);
+    }
+  }
+
+  public toggleClick(): void {
+    this.clicks.next();
+  }
+
 
   files: Array<any> = [
     {
@@ -41,17 +101,17 @@ export class PlayerComponent {
     this.audioService.seekVolumeTo(0.3);
   }
 
-  @HostListener('document:keydown.space') 
-  spaceHandler(event: KeyboardEvent) {  
+  @HostListener('document:keydown.space')
+  spaceHandler(event: KeyboardEvent) {
     if(this.state.playing)
       this.pause()
     else
     {
       if(!this.state.error)
         this.play()
-    } 
+    }
   }
-  
+
   isFirstPlaying() {
     return this.currentFile.index === 0;
   }
