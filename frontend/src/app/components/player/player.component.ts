@@ -70,7 +70,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   ];
 
   state: StreamState;
-  currentFile: any = {};
+  currentFile: Song;
   isVolumeChanging: string = "hidden";
 
   constructor(
@@ -88,6 +88,8 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.subscription = this.clicks.pipe(
       throttleTime(300)
     ).subscribe(e => this.toggleDrawer.emit());
+
+    console.log("init");
   }
 
   ngOnDestroy() {
@@ -95,11 +97,17 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("change");
     console.log(changes);
     if (changes.song) {
+      this.playStream(changes.song.currentValue.songURL);
       console.log('song changed or continued');
     }
     if (changes.currentSongStopped) {
+      if(changes.currentSongStopped.currentValue)
+        this.pause();
+      else
+        this.play();
       console.log(changes.currentSongStopped);
     }
   }
@@ -120,25 +128,20 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   get songImage() : string {
-    return  (this.currentFile.file && this.currentFile.file.image) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
+    return  (this.song && this.song.album && this.song.album.pictureURL) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
   }
 
   isFirstPlaying() {
-    return this.currentFile.index === 0;
+    return this.currentSongIndex === 0;
   }
 
   isLastPlaying() {
-    return this.currentFile.index === this.files.length - 1;
+    return this.currentSongIndex === this.songPlaylistSize - 1;
   }
 
   playStream(url) {
-    this.audioService.playStream(url).subscribe(events => {});
-  }
-
-  openFile(file, index) {
-    this.currentFile = { index, file };
     this.audioService.stop();
-    this.playStream(file.url);
+    this.audioService.playStream(url).subscribe(events => {});
   }
 
   pause() {
@@ -148,12 +151,11 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   play() {
     console.log("play")
-    if(this.currentFile.index == null && this.files.length != 0)//remove
-      this.openFile(this.files[0], 0);
-    else
+    if(this.song)
+    {
       this.audioService.play();
-
-    this.playCurrentSong.emit();
+      this.playCurrentSong.emit();
+    }
   }
 
   stop() {
@@ -162,16 +164,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   next() {
-    const index = this.currentFile.index + 1;
-    const file = this.files[index];
-    this.openFile(file, index);
+    this.audioService.stop();
     this.playNextSong.emit();
   }
 
   previous() {
-    const index = this.currentFile.index - 1;
-    const file = this.files[index];
-    this.openFile(file, index);
+    this.audioService.stop();
     this.playPreviousSong.emit();
   }
 

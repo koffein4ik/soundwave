@@ -3,20 +3,20 @@
 
       <mat-toolbar-row>
         {{ state?.readableCurrentTime }}
-        <mat-slider class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined">
+        <mat-slider class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" [disabled]="state?.error || song === undefined">
         </mat-slider>
         {{ state?.readableDuration }}
       </mat-toolbar-row>
 
       <mat-toolbar-row>
 
-        <div class="song-img-container" *ngIf="currentFile?.file">
+        <div class="song-img-container" *ngIf="song">
           <img class="song-img" [src]="songImage" >
         </div>
 
         <div class="media-action-bar-container">
 
-          <div class="media-action-bar-title" *ngIf="currentFile?.file">
+          <div class="media-action-bar-title" *ngIf="song">
             <span>{{currentFile?.file?.name}}</span>
           </div>
 
@@ -46,7 +46,7 @@
               </div>
             </div>
 
-            <div class="right-icons" *ngIf="currentFile?.file">
+            <div class="right-icons" *ngIf="song">
               <button mat-button (click)="addToPlaylist()">
                 <mat-icon>add</mat-icon>
               </button>   
