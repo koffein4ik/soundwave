@@ -52,6 +52,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   state: StreamState;
   currentFile: Song;
   isVolumeChanging: string = "hidden";
+  showPlaylist: boolean = false;
   volume: number = 0.3;
 
   private clicks = new Subject();
@@ -123,6 +124,22 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     if(this.volume > 0.3) return "volume_up";
     if(this.volume <= 0.3 && this.volume > 0) return "volume_down";
     return "volume_mute";
+  }
+
+  get playlists(){
+    return [
+      {id:1, name:"Favorite"},
+      {id:2, name:"Sport"},
+      {id:3, name:"Work"},
+      {id:4, name:"Study"},
+      {id:5, name:"Runnig"},
+      {id:6, name:"Rock"},
+      {id:7, name:"Rap"},
+      {id:8, name:"Jazz"},
+      {id:9, name:"Pop"},
+      {id:10, name:"Party"},
+      {id:11, name:"Relax"},
+    ]
   }
 
   isFirstPlaying() {
@@ -197,7 +214,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     //TODO: SHOW CURRENT PLAYLIST
   }
 
-  addToPlaylist() {
+  showAvailiblePlaylists() {
+    this.showPlaylist = !this.showPlaylist;
     //TODO: SHOW USERS PLAYLIST AND ADD POSSIBILITY TO ADD SONGS TO THEM
+  }
+
+  addToSelectedPlaylist(playlist:any) {
+    console.log(playlist)
   }
 }

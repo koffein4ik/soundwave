@@ -5,7 +5,7 @@
         <mat-icon mat-list-icon>play_circle_filled</mat-icon>
       </button>
       <button mat-button [style.visibility]="songIconVisibility" (click)="stopCurrentSong.emit()" *ngIf="!currentSongStopped && currentSongPlaying === song" >
-        <mat-icon mat-list-icon>pause</mat-icon>
+        <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
       </button>
       <div [style.visibility]="bubbleVisibility" class="bubble-container">
         <div class="playing-bubble"></div>

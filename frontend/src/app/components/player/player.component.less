@@ -65,3 +65,30 @@
     margin-left: auto;
   }
 }
+
+
+.playlists-container{
+  position: absolute;
+  padding: 10px;
+  width: 223px;
+  height: 250px;
+  right: 20px;
+  bottom: 160px;
+  z-index: 101;
+  background-color: #3c4dac;
+  overflow-y: scroll;
+  .playlist-content{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: #fff;
+    cursor: pointer;
+    button{
+      padding: 0;
+      min-width: 20px;
+    }
+    .mat-icon{
+      display: inline-block;
+    }
+  }
+}
