@@ -93,6 +93,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     console.log("change");
     console.log(changes);
     if (changes.song) {
+      if(changes.song.currentValue && changes.song.currentValue.songURL )
       this.playStream(changes.song.currentValue.songURL);
       console.log('song changed or continued');
     }
@@ -216,6 +217,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   showCurrentPlaylist() {
+    this.showPlaylist = false;
     this.clicks.next();
     //TODO: SHOW CURRENT PLAYLIST
   }
@@ -227,5 +229,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   addToSelectedPlaylist(playlist:any) {
     console.log(playlist)
+    alert(`song has been added to the playlist ${playlist.name}`)
   }
+
 }

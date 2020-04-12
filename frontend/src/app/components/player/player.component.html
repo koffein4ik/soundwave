@@ -1,5 +1,5 @@
 <div class="media-footer">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="warn">
 
       <mat-toolbar-row>
         {{ state?.readableCurrentTime }}
@@ -61,11 +61,12 @@
     </mat-toolbar>
 
     <div *ngIf="showPlaylist" class="playlists-container">
+      <p>Добавить в плейлист</p>
       <div class="playlist-content" *ngFor="let playlist of playlists">
-        <button mat-button (click)="addToSelectedPlaylist(playlist)">
+        <button mat-button (mousedown)="addToSelectedPlaylist(playlist)" type="button">
           <mat-icon>add</mat-icon>
-        </button>
-        <span>{{playlist.name}}</span>
+          <span>{{playlist.name}}</span>
+        </button>   
       </div>
     </div>
 

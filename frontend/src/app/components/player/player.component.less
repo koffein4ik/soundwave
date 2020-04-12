@@ -77,18 +77,32 @@
   z-index: 101;
   background-color: #3c4dac;
   overflow-y: scroll;
+  p{
+    margin-top: 0;
+    color: white;
+  }
   .playlist-content{
+    z-index: 102;
     display: flex;
     align-items: center;
     justify-content: left;
     color: #fff;
+    &:hover{
+      background-color: #5162c4;
+    }
+    &:hover mat-icon{
+      visibility: visible;
+    }
     cursor: pointer;
     button{
       padding: 0;
       min-width: 20px;
+      width: 100%;
+      text-align: left;
     }
     .mat-icon{
       display: inline-block;
+      visibility: hidden;
     }
   }
 }
