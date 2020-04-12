@@ -93,7 +93,9 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       if(changes.currentSongStopped.currentValue)
         this.pause();
       else
+      {
         this.play();
+      }
       console.log(changes.currentSongStopped);
     }
   }
@@ -138,6 +140,11 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       {
         if(!this.isLastPlaying())
           this.next();
+        else
+        {
+          this.stop();
+          this.playStream(this.song.songURL);        
+        }
       }
     });
   }

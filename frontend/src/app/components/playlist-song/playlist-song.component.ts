@@ -23,9 +23,38 @@ export class PlaylistSongComponent implements OnInit {
   @Output()
   stopCurrentSong = new EventEmitter<any>();
 
+  hover: string = 'hidden';
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  get songIconVisibility(): string
+  {
+    if( this.currentSongPlaying !== this.song) {
+       return this.hover;
+    }
+    else if( this.currentSongStopped){
+      return 'visible'
+    }
+    else if(!this.currentSongStopped && this.hover == 'visible') {
+      return this.hover;
+    }
+
+    return 'hidden'
+  }
+
+  get bubbleVisibility(): string
+  {
+    if( this.currentSongPlaying == this.song && !this.currentSongStopped && this.hover == 'hidden') {
+      return "visible";
+    }
+    return 'hidden'
+  }
+
+
 }
+
+
+//      <img [src]="song.album.pictureURL">
