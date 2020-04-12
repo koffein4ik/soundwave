@@ -24,7 +24,7 @@
 
             <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
               <mat-icon mat-list-icon>skip_previous</mat-icon>
-            </button>            
+            </button>
             <button mat-button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
               <mat-icon mat-list-icon>play_circle_filled</mat-icon>
             </button>
@@ -34,7 +34,7 @@
             <button  mat-button [disabled]="isLastPlaying()" (click)="next()">
               <mat-icon mat-list-icon>skip_next</mat-icon>
             </button>
-            
+
             <div class="volume-control" >
               <button mat-button (click)="onChangeVolume()">
                 <mat-icon mat-list-icon>{{volumeIcon}}</mat-icon>
@@ -45,12 +45,12 @@
             </div>
 
             <div class="right-icons">
-              <button mat-button (click)="showAvailiblePlaylists()">
+              <button mat-button (click)="showAvailiblePlaylists()" *ngIf="authService.hasValidToken()">
                 <mat-icon>add</mat-icon>
-              </button>   
+              </button>
               <button mat-button (click)="showCurrentPlaylist()">
                 <mat-icon>list</mat-icon>
-              </button>    
+              </button>
             </div>
 
           </mat-toolbar-row>
@@ -62,10 +62,10 @@
 
     <div *ngIf="showPlaylist" class="playlists-container">
       <div class="playlist-content" *ngFor="let playlist of playlists">
-        <button mat-button >
+        <button mat-button (click)="addToSelectedPlaylist(playlist)">
           <mat-icon>add</mat-icon>
-        </button>   
-        <span (Сlick)="addToSelectedPlaylist(playlist)">{{playlist.name}}</span>
+        </button>
+        <span>{{playlist.name}}</span>
       </div>
     </div>
 

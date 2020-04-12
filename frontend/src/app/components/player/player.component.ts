@@ -14,6 +14,8 @@ import { StreamState } from "../../interfaces/stream-state";
 import {Subject, Subscription} from "rxjs";
 import {throttleTime} from "rxjs/operators";
 import {Song} from "../../models/song.model";
+import {Playlist} from "../../models/playlist.model";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-player',
@@ -49,6 +51,9 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   @Input()
   songPlaylistSize: number;
 
+  @Input()
+  playlists: Playlist[];
+
   state: StreamState;
   currentFile: Song;
   isVolumeChanging: string = "hidden";
@@ -60,6 +65,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   constructor(
     public audioService: AudioService,
+    private authService: AuthService
   ) {
     this.audioService.getState().subscribe(state => {
       this.state = state;
@@ -126,21 +132,21 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     return "volume_mute";
   }
 
-  get playlists(){
-    return [
-      {id:1, name:"Favorite"},
-      {id:2, name:"Sport"},
-      {id:3, name:"Work"},
-      {id:4, name:"Study"},
-      {id:5, name:"Runnig"},
-      {id:6, name:"Rock"},
-      {id:7, name:"Rap"},
-      {id:8, name:"Jazz"},
-      {id:9, name:"Pop"},
-      {id:10, name:"Party"},
-      {id:11, name:"Relax"},
-    ]
-  }
+  // get playlists(){
+  //   return [
+  //     {id:1, name:"Favorite"},
+  //     {id:2, name:"Sport"},
+  //     {id:3, name:"Work"},
+  //     {id:4, name:"Study"},
+  //     {id:5, name:"Runnig"},
+  //     {id:6, name:"Rock"},
+  //     {id:7, name:"Rap"},
+  //     {id:8, name:"Jazz"},
+  //     {id:9, name:"Pop"},
+  //     {id:10, name:"Party"},
+  //     {id:11, name:"Relax"},
+  //   ]
+  // }
 
   isFirstPlaying() {
     return this.currentSongIndex === 0;
@@ -160,7 +166,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
         else
         {
           this.stop();
-          this.playStream(this.song.songURL);        
+          this.playStream(this.song.songURL);
         }
       }
     });

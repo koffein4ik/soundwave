@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Song} from "../../models/song.model";
+import {PlaylistService} from "../../services/playlist/playlist.service";
+import {Playlist} from "../../models/playlist.model";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-player-playlist',
@@ -8,11 +11,13 @@ import {Song} from "../../models/song.model";
 })
 export class PlayerPlaylistComponent implements OnInit {
 
-  constructor() {
+  constructor(private playlistService: PlaylistService,
+              private authService: AuthService) {
   }
 
   public currentSongPlaying: Song;
   public currentSongStopped: boolean = false;
+  public playlists: Playlist[] = [];
 
   public playlistSongs: Song[] = [
     {
@@ -97,6 +102,15 @@ export class PlayerPlaylistComponent implements OnInit {
     }
   ];
 
+  public ngOnInit(): void {
+    if (this.authService.hasValidToken()) {
+      this.playlistService.getUserPlaylists().subscribe((data: Playlist[]) => {
+        this.playlists = data;
+        console.log(this.playlists);
+      })
+    }
+  }
+
   public toggleDrawer(drawer): void {
     drawer.toggle();
   }
@@ -132,9 +146,6 @@ export class PlayerPlaylistComponent implements OnInit {
     } else {
       this.currentSongPlaying = this.playlistSongs[this.playlistSongs.length - 1];
     }
-  }
-
-  ngOnInit() {
   }
 
 }

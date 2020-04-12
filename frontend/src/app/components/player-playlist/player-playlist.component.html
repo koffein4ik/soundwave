@@ -19,6 +19,7 @@
             [song]="currentSongPlaying"
             [songPlaylistSize]="playlistSongs.length"
             [currentSongIndex]="playlistSongs.indexOf(currentSongPlaying)"
+            [playlists]="playlists"
             (stopCurrentSong)="stopCurrentSong()"
             (playCurrentSong)="playCurrentSong()"
             [currentSongStopped]="currentSongStopped"

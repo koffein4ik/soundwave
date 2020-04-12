@@ -12,6 +12,6 @@ exports.authenticate = function(req, res) {
     }
 };
 
-exports.getUserId = function(req) {
-
+exports.getUserId = function(req, res) {
+    req.headers.user_id = JSON.parse(atob(req.headers.authorization.split('.')[1])).userId;
 };

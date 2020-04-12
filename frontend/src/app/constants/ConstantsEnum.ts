@@ -3,5 +3,7 @@ export enum ConstantsEnum {
   searchURL = "search",
   registrationURL = "registration",
   loginURL = "login",
-  userAPIURL = "user/"
+  userAPIURL = "user/",
+  playlistAPIURL = "playlist/",
+  getPlaylists = "getplaylists"
 }

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 const app = express();
 const cors = require('cors');
-const authService = require('./services/authService');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -26,6 +25,10 @@ const registrationRouter = require("./routers/registrationRouter");
 
 app.use("/registration", registrationRouter);
 
+const userRouter = require("./routers/userRouter");
+
+app.use("/user", userRouter);
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
     var connection = mysql.createConnection(config.config);
@@ -36,13 +39,6 @@ app.get('/', function (req, res) {
         });
     });
     console.log(config);
-});
-
-app.use('/user', function (req, res, next) {
-    console.log('МИДЛВЭРЕ');
-    if (authService.authenticate(req, res)) {
-        next();
-    }
 });
 
 app.get('/user/authtest', function (req, res) {
