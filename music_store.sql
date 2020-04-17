@@ -11,7 +11,7 @@ create table album
 	album_id int auto_increment
 		primary key,
 	name varchar(255) null,
-	release_date datetime null,
+	release_date date null,
 	artist_id int null,
 	picture_url varchar(255) null,
 	constraint album_ibfk_1
@@ -25,7 +25,7 @@ create table genres
 (
 	genre_id int auto_increment
 		primary key,
-	name int null
+	name varchar(30) null
 );
 
 create table songs
