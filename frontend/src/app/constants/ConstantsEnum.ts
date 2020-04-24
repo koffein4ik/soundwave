@@ -5,5 +5,7 @@ export enum ConstantsEnum {
   loginURL = "login",
   userAPIURL = "user/",
   playlistAPIURL = "playlist/",
-  getPlaylists = "getplaylists"
+  getPlaylists = "getplaylists",
+  createPlaylist = "createplaylist",
+  uploadFile = "upload"
 }

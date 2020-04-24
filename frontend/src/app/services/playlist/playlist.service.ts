@@ -8,10 +8,20 @@ import {ConstantsEnum} from "../../constants/ConstantsEnum";
 })
 
 export class PlaylistService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   public getUserPlaylists(): Observable<any> {
     return this.http.get(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
-      ConstantsEnum.playlistAPIURL +  ConstantsEnum.getPlaylists);
+      ConstantsEnum.playlistAPIURL + ConstantsEnum.getPlaylists);
+  }
+
+  public createNewPlaylist(playlistName: string, picture: File): Observable<any> {
+    const requestBody = {
+      playlistName: playlistName,
+      picture: picture
+    };
+    return this.http.post(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
+      ConstantsEnum.playlistAPIURL + ConstantsEnum.createPlaylist, requestBody);
   }
 }

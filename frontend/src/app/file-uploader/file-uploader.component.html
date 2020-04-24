@@ -1,0 +1,26 @@
+<div class="file-uploader-container">
+  <div class="file-uploader-description-container">
+    <p>{{description}}</p>
+  </div>
+  <div class="upload-image-container">
+    <img src="assets/cloud-upload.png">
+  </div>
+  <div class="file-chooser-container">
+    <div class="file-chooser-container-input">
+      <input type="file"
+             accept="{{fileExtensions}}"
+             id="file"
+             hidden
+             #fileInput
+             (change)="handleFileInput($event.target.files)">
+      <button type="mat-button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    </div>
+    <div class="chosen-file" *ngIf="fileToUpload">
+      <div class="chosen-file-info">
+        <p class="chosen-file-name">{{fileToUpload.name}}</p>
+        <mat-icon (click)="onRemoveFileClick()">close</mat-icon>
+      </div>
+<!--      <button type="mat-button" mat-raised-button (click)="onUploadButtonClick()">Upload file</button>-->
+    </div>
+  </div>
+</div>

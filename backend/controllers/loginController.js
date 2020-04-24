@@ -9,7 +9,6 @@ const connection = mysql.createConnection(config.config);
 
 exports.login = async function(request, response) {
     const user = (await findUserInDatabase(request.body.nickname))[0][0];
-    console.log(user);
     if (user && bcrypt.compareSync(request.body.password, user.password)) {
         const login = request.body.nickname;
         const userId = user.id;

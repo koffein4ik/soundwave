@@ -3,6 +3,7 @@ const userRouter = express.Router();
 const authService = require('../services/authService');
 
 const playlistRouter = require("./playlistRouter");
+const fileRouter = require("./fileRouter");
 
 userRouter.use(function(req, res, next) {
     if (authService.authenticate(req, res)) {
@@ -18,5 +19,7 @@ userRouter.get("/hey",  function (req, res) {
 });
 
 userRouter.use("/playlist", playlistRouter);
+
+userRouter.use("/upload", fileRouter);
 
 module.exports = userRouter;

@@ -1,0 +1,13 @@
+<div class="playlist-create-container">
+
+  <app-file-uploader (onFileChosen)="onFileChosen($event)"></app-file-uploader>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput name="name" #nameInput ngModel>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onClickSubmit(nameInput.value)">
+    Save
+  </button>
+</div>
