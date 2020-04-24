@@ -1,0 +1,10 @@
+<div class="user-playlist-container">
+    <div class="add-playlist-container">
+    </div>
+    <div class="playlist-container">
+        <div *ngFor="let playlist of playlists" >
+            <playlist-item [playlist]=playlist>
+            </playlist-item>
+        </div>
+    </div>
+</div>

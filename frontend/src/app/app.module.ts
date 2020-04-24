@@ -30,11 +30,14 @@ import { PlaylistSongComponent } from './components/playlist-song/playlist-song.
 import { UserPageComponent } from './pages/userPage/user-page.component';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { CreatePlaylistComponent } from './components/create-playlist-service/create-playlist.component';
+import { UserPlaylistsComponent } from './components/user-playlists/user-playlists.component';
+import { PlaylistItemComponent } from './components/playlist-item/playlist-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationPageComponent,
+    UserPlaylistsComponent,
     LoginPageComponent,
     HeaderComponent,
     PlayerComponent,
@@ -44,6 +47,7 @@ import { CreatePlaylistComponent } from './components/create-playlist-service/cr
     UserPageComponent,
     FileUploaderComponent,
     CreatePlaylistComponent,
+    PlaylistItemComponent,
   ],
   imports: [
     BrowserModule,
