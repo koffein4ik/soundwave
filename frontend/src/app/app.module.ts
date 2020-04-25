@@ -32,6 +32,8 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
 import { CreatePlaylistComponent } from './components/create-playlist-service/create-playlist.component';
 import { UserPlaylistsComponent } from './components/user-playlists/user-playlists.component';
 import { PlaylistItemComponent } from './components/playlist-item/playlist-item.component';
+import { RadioPageComponent } from './pages/radio-page/radio-page.component';
+import { GenreItemComponent } from './components/genre-item/genre-item.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { PlaylistItemComponent } from './components/playlist-item/playlist-item.
     FileUploaderComponent,
     CreatePlaylistComponent,
     PlaylistItemComponent,
+    RadioPageComponent,
+    GenreItemComponent,
   ],
   imports: [
     BrowserModule,

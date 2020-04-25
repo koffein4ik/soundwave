@@ -25,3 +25,7 @@ exports.findSongsAndItsArtistsInDB = async function (searchRow){
     return await executeQuery(sqlQueries.FIND_SONGS_BY_NAME_WITH_ITS_ARTISTS, [`%${searchRow}%`]);
 };
 
+exports.findAllGenres = async function() {
+    return await executeQuery(sqlQueries.FIND_ALL_GENRES);
+};
+

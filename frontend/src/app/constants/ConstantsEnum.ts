@@ -7,5 +7,6 @@ export enum ConstantsEnum {
   playlistAPIURL = "playlist/",
   getPlaylists = "getplaylists",
   createPlaylist = "createplaylist",
-  uploadFile = "upload"
+  uploadFile = "upload",
+  genres = "genres"
 }

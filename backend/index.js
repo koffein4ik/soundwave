@@ -29,6 +29,10 @@ const userRouter = require("./routers/userRouter");
 
 app.use("/user", userRouter);
 
+const genreRouter = require("./routers/genreRouter");
+
+app.use("/genres", genreRouter);
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
     var connection = mysql.createConnection(config.config);

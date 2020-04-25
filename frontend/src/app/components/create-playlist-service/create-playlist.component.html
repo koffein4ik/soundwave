@@ -2,14 +2,14 @@
 
   <div class="playlist-uploaded-image-container" [style.background-image]="'url(' + songImage + ')'">
     <div class="playlist-image-container">
-      <app-file-uploader 
+      <app-file-uploader
               (onFileChosen)="onFileChosen($event)"
               (onFileCanceled)="onFileCanceled()">
       </app-file-uploader>
     </div>
   </div>
 
-  <div class="playlist-info-filds">
+  <div class="playlist-info-fields">
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput name="name" #nameInput ngModel>
