@@ -1,13 +1,22 @@
 <div class="playlist-create-container">
 
-  <app-file-uploader (onFileChosen)="onFileChosen($event)"></app-file-uploader>
+  <div class="playlist-uploaded-image-container" [style.background-image]="'url(' + songImage + ')'">
+    <div class="playlist-image-container">
+      <app-file-uploader 
+              (onFileChosen)="onFileChosen($event)"
+              (onFileCanceled)="onFileCanceled()">
+      </app-file-uploader>
+    </div>
+  </div>
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput name="name" #nameInput ngModel>
-  </mat-form-field>
+  <div class="playlist-info-filds">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput name="name" #nameInput ngModel>
+    </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="onClickSubmit(nameInput.value)">
-    Save
-  </button>
+    <button class="save-playlist-button" mat-raised-button color="primary" (click)="onClickSubmit(nameInput.value)">
+      Save
+    </button>
+  </div>
 </div>

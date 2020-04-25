@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FileService} from "../services/files/file-service";
+import {FileService} from "../../services/files/file-service";
 
 @Component({
   selector: 'app-file-uploader',
@@ -19,6 +19,9 @@ export class FileUploaderComponent {
 
   @Output()
   onFileChosen: EventEmitter<File> = new EventEmitter();
+
+  @Output()
+  onFileCanceled: EventEmitter<File> = new EventEmitter();
 
   private fileToUpload: File;
 
@@ -43,6 +46,7 @@ export class FileUploaderComponent {
     this.fileToUpload = null;
     const input = <HTMLInputElement>document.getElementById("file");
     input.value = "";
+    this.onFileCanceled.emit();
   }
 
   public onSuccessUpload(): void {

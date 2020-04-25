@@ -1,4 +1,23 @@
 <div class="file-uploader-container">
+    <div class="file-chooser-container-input">
+      <input type="file"
+             accept="{{fileExtensions}}"
+             id="file"
+             hidden
+             #fileInput
+             (change)="handleFileInput($event.target.files)">
+      <button mat-button (click)="fileInput.click()" *ngIf="!fileToUpload">
+        <mat-icon mat-list-icon>attach_file</mat-icon>
+      </button>
+      <button mat-button  (click)="onRemoveFileClick()"  *ngIf="fileToUpload">
+        <mat-icon mat-list-icon>clear</mat-icon>
+      </button>
+    </div>
+</div>
+
+
+<!--
+<div class="file-uploader-container">
   <div class="file-uploader-description-container">
     <p>{{description}}</p>
   </div>
@@ -20,7 +39,8 @@
         <p class="chosen-file-name">{{fileToUpload.name}}</p>
         <mat-icon (click)="onRemoveFileClick()">close</mat-icon>
       </div>
-<!--      <button type="mat-button" mat-raised-button (click)="onUploadButtonClick()">Upload file</button>-->
     </div>
   </div>
 </div>
+
+-->

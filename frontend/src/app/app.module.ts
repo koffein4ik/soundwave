@@ -28,7 +28,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import { PlaylistSongComponent } from './components/playlist-song/playlist-song.component';
 import { UserPageComponent } from './pages/userPage/user-page.component';
-import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { CreatePlaylistComponent } from './components/create-playlist-service/create-playlist.component';
 import { UserPlaylistsComponent } from './components/user-playlists/user-playlists.component';
 import { PlaylistItemComponent } from './components/playlist-item/playlist-item.component';

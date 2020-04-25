@@ -1,0 +1,49 @@
+.playlist-create-container{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #181818;
+    mat-label{
+        color: white;
+    }
+
+    mat-form-field{
+        display: block;    
+        color: white;
+    }
+}
+.playlist-uploaded-image-container{
+    margin: 5px;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background: url(https://www.novonordiskmedical.com/content/dam/medical/novonordiskmedical/images/question-mark-large.png)  no-repeat center;
+    background-size: 200px 200px;
+
+    &:hover > *{
+        background: rgba(0,0,0,.55);
+    } 
+}
+
+.playlist-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.playlist-info-filds{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    width: 400px;
+    height: 200px;
+    .save-playlist-button{
+        width: 40px;
+        margin-top: auto;
+        margin-bottom: 5px;
+    }
+}
