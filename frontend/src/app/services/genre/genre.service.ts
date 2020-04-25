@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Genre} from "../models/genre.model";
-import {ConstantsEnum} from "../constants/ConstantsEnum";
+import {Genre} from "../../models/genre.model";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Injectable({
   providedIn: 'root'

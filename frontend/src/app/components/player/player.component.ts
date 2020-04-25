@@ -16,6 +16,7 @@ import {throttleTime} from "rxjs/operators";
 import {Song} from "../../models/song.model";
 import {Playlist} from "../../models/playlist.model";
 import {AuthService} from "../../services/auth/auth.service";
+import {PlayerStateService} from "../../services/player-state/player-state.service";
 
 @Component({
   selector: 'app-player',
@@ -28,31 +29,31 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   toggleDrawer = new EventEmitter<any>();//появляется плейлист
 
   @Output()
-  stopCurrentSong = new EventEmitter<any>();//
+  stopCurrentSong = new EventEmitter<any>();//remove
 
   @Output()
-  playCurrentSong = new EventEmitter<any>();
+  playCurrentSong = new EventEmitter<any>();//remove
 
   @Output()
-  playNextSong = new EventEmitter<any>();
+  playNextSong = new EventEmitter<any>();//remove
 
   @Output()
-  playPreviousSong = new EventEmitter<any>();
+  playPreviousSong = new EventEmitter<any>();//remove
 
   @Input()
-  song: Song;
+  song: Song;//remove
 
   @Input()
-  currentSongStopped: boolean;
+  currentSongStopped: boolean;//remove
 
   @Input()
-  currentSongIndex: number;
+  currentSongIndex: number;//remove
 
   @Input()
-  songPlaylistSize: number;
+  songPlaylistSize: number;//remove
 
   @Input()
-  playlists: Playlist[];
+  playlists: Playlist[];//remove
 
   state: StreamState;
   currentFile: Song;
@@ -65,7 +66,8 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   constructor(
     public audioService: AudioService,
-    private authService: AuthService
+    private authService: AuthService,
+    private playerStateService: PlayerStateService
   ) {
     this.audioService.getState().subscribe(state => {
       this.state = state;
@@ -79,16 +81,23 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.subscription = this.clicks.pipe(
       throttleTime(400)
     ).subscribe(e => this.toggleDrawer.emit());
-
-    console.log("init");
+    this.playerStateService.playPlaylistObservable$.subscribe((data: {playlist: Playlist, indexInPlaylist: number}) => {
+        this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
+    });
+    this.playerStateService.pauseCurrentSongObservable$.subscribe(() => {
+      //TODO implement method for stopping current song
+    });
+    this.playerStateService.resumeCurrentSongObservable$.subscribe(() => {
+      //TODO implement method fore resuming current song
+    });
   }
 
   ngOnDestroy() {
-    alert("destroy")
     localStorage.setItem("playerVolume", this.volume.toString());
     this.subscription.unsubscribe();
   }
 
+  //TODO REMOVE
   ngOnChanges(changes: SimpleChanges): void {
     console.log("change");
     console.log(changes);
@@ -108,6 +117,10 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     }
   }
 
+  public playSongFromPlaylist(playlist: Playlist, index: number) {
+    //TODO
+  }
+
   public toggleClick(): void {
     this.clicks.next();
   }
@@ -115,11 +128,11 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   @HostListener('document:keydown.space')
   spaceHandler(event: KeyboardEvent) {
     if(this.state.playing)
-      this.pause()
+      this.pause();
     else
     {
       if(!this.state.error)
-        this.play()
+        this.play();
     }
   }
 
@@ -174,12 +187,13 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   pause() {
+    this.playerStateService.pauseCurrentSong.next("STOP");
     this.audioService.pause();
     this.stopCurrentSong.emit();
   }
 
   play() {
-    console.log("play")
+    console.log("play");
     if(this.song)
     {
       this.audioService.play();

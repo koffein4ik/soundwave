@@ -3,6 +3,8 @@ import {Song} from "../../models/song.model";
 import {PlaylistService} from "../../services/playlist/playlist.service";
 import {Playlist} from "../../models/playlist.model";
 import {AuthService} from "../../services/auth/auth.service";
+import {PlayerStateService} from "../../services/player-state/player-state.service";
+import {skip} from "rxjs/operators";
 
 @Component({
   selector: 'app-player-playlist',
@@ -12,12 +14,15 @@ import {AuthService} from "../../services/auth/auth.service";
 export class PlayerPlaylistComponent implements OnInit {
 
   constructor(private playlistService: PlaylistService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private playerStateService: PlayerStateService) {
   }
 
   public currentSongPlaying: Song;
+  public currentPlaylist: Playlist;
   public currentSongStopped: boolean = false;
   public playlists: Playlist[] = [];
+  private componentName: string = "player-playlist";
 
   public playlistSongs: Song[] = [
     {
@@ -103,6 +108,29 @@ export class PlayerPlaylistComponent implements OnInit {
   ];
 
   public ngOnInit(): void {
+    this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
+      if (sender !== this.componentName) {
+        console.log('triggered');
+        this.stopCurrentSong();
+      }
+    });
+    this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
+      console.log('resume');
+      if (sender !== this.componentName) {
+        this.playCurrentSong();
+      }
+    });
+    this.playerStateService.playPlaylistObservable$.pipe(skip(1)).subscribe((data: {playlist: Playlist, indexInPlaylist: number, sender: string}) => {
+      if (data.sender !== this.componentName) {
+        this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
+      }
+    });
+    this.currentPlaylist = {
+      name: "Initial",
+      id: 1,
+      pictureURL: "test",
+      songs: this.playlistSongs
+    };
     if (this.authService.hasValidToken()) {
       this.playlistService.getUserPlaylists().subscribe((data: Playlist[]) => {
         this.playlists = data;
@@ -111,41 +139,35 @@ export class PlayerPlaylistComponent implements OnInit {
     }
   }
 
+  public playSongFromPlaylist(playlist: Playlist, index: number): void {
+    console.log("плей йопт");
+    this.currentPlaylist = playlist;
+    this.currentSongPlaying = this.currentPlaylist[index];
+  }
+
   public toggleDrawer(drawer): void {
     drawer.toggle();
   }
 
   public changeCurrentSongPlaying(song: Song): void {
-    console.log("in change current playlist song");
-    console.log(song);
+    const data = {
+      playlist: this.currentPlaylist,
+      indexInPlaylist: this.currentPlaylist.songs.indexOf(song),
+      sender: "player-playlist"
+    };
+    this.playerStateService.playPlaylist.next(data);
     this.currentSongPlaying = song;
     this.currentSongStopped = false;
   }
 
   public stopCurrentSong(): void {
+    this.playerStateService.pauseCurrentSong.next(this.componentName);
     this.currentSongStopped = true;
   }
 
   public playCurrentSong(): void {
+    this.playerStateService.resumeCurrentSong.next(this.componentName);
     this.currentSongStopped = false;
-  }
-
-  public playNextSong(): void {
-    let currentSongIndex = this.playlistSongs.indexOf(this.currentSongPlaying);
-    if (currentSongIndex < (this.playlistSongs.length - 1)) {
-      this.currentSongPlaying = this.playlistSongs[currentSongIndex + 1];
-    } else {
-      this.currentSongPlaying = this.playlistSongs[0];
-    }
-  }
-
-  public playPreviousSong(): void {
-    let currentSongIndex = this.playlistSongs.indexOf(this.currentSongPlaying);
-    if (currentSongIndex > 0) {
-      this.currentSongPlaying = this.playlistSongs[currentSongIndex - 1];
-    } else {
-      this.currentSongPlaying = this.playlistSongs[this.playlistSongs.length - 1];
-    }
   }
 
 }
