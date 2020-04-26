@@ -1,4 +1,5 @@
 export class Artist {
-  id: number;
+  artist_id: number;
   name: string;
+  picture_url: string;
 }

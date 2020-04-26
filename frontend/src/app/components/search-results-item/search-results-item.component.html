@@ -1,0 +1,8 @@
+<div class="search-results-item-container">
+  <div class="search-results-item-picture" [style.background-image]="'url(' + pictureBackURL +')'">
+    <img [src]="pictureBackURL">
+  </div>
+  <div class="search-results-item-name">
+    <a [routerLink]="urlToGo + '/' + itemId">{{itemName}}</a>
+  </div>
+</div>

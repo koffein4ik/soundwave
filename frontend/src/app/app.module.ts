@@ -36,6 +36,10 @@ import { RadioPageComponent } from './pages/radio-page/radio-page.component';
 import { GenreItemComponent } from './components/genre-item/genre-item.component';
 import { SongItemComponent } from './components/song-item/song-item.component';
 import { SongsListComponent } from './components/songs-list/songs-list.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { SearchResultsItemComponent } from './components/search-results-item/search-results-item.component';
+import { SearchResultsArtistsComponent } from './components/search-results-artists/search-results-artists.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,9 @@ import { SongsListComponent } from './components/songs-list/songs-list.component
     GenreItemComponent,
     SongItemComponent,
     SongsListComponent,
+    SearchResultsComponent,
+    SearchResultsItemComponent,
+    SearchResultsArtistsComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +80,8 @@ import { SongsListComponent } from './components/songs-list/songs-list.component
     MatCardModule,
     MatSidenavModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [
     {

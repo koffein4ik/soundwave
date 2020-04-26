@@ -17,6 +17,10 @@ const songRouter = require("./routers/songRouter");
 
 app.use("/songs", songRouter);
 
+const imageRouter = require("./routers/imageRouter");
+
+app.use("/images", imageRouter);
+
 const loginRouter = require("./routers/loginRouter");
 
 app.use("/login", loginRouter);

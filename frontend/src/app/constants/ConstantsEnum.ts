@@ -1,5 +1,6 @@
 export enum ConstantsEnum {
   backURL = "http://localhost:3000/",
+  images = "images",
   searchURL = "search",
   registrationURL = "registration",
   loginURL = "login",

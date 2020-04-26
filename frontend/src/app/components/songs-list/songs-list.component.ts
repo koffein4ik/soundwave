@@ -21,7 +21,7 @@ export class SongsListComponent implements OnInit {
   public playlistSongs: Song[] = [
     {
       name: "Now it's perfect",
-      artist: {name: "ширан", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -31,7 +31,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "4 украинки",
-      artist: {name: "морген", id: 12},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -41,7 +41,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -51,7 +51,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -61,7 +61,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -71,7 +71,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -81,7 +81,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -91,7 +91,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artist: {name: "John", id: 123},
+      artist: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
