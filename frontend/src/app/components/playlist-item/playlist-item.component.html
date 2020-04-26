@@ -1,14 +1,17 @@
 <div class="playlist-item-container" (mouseenter)="hover = 'visible';" (mouseleave)="hover = 'hidden';">
-    <div class="playlist-item-picture" [style.background-image]="'url(' + playlist.pictureURL + ')'">        
-        <button mat-button [style.visibility]="hover" (click)="playPlaylist.emit()" *ngIf="!isPlaying" >
-            <mat-icon mat-list-icon>play_circle_filled</mat-icon>
-        </button>
-        <button mat-button [style.visibility]="hover" (click)="stopPlaying.emit()" *ngIf="isPlaying" >
-            <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
-        </button>
-    </div>
-    <div class="playlist-item-info">
-        <a [routerLink]="'/playlist/' + playlist.id"  class="playlist-name">{{playlist.name}}</a>
-    </div>
+  <div class="playlist-item-picture" [style.background-image]="'url(' + playlist.pictureURL + ')'">
+    <button mat-button [style.visibility]="hover" (click)="playPlaylist.emit()" *ngIf="!isPlaying && isCurrentPlaylistPlaying">
+      <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+    </button>
+    <button mat-button [style.visibility]="hover" (click)="playAnotherPlaylist.emit()" *ngIf="!isCurrentPlaylistPlaying">
+      <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+    </button>
+    <button mat-button [style.visibility]="hover" (click)="stopPlaying.emit()" *ngIf="isPlaying && isCurrentPlaylistPlaying">
+      <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
+    </button>
+  </div>
+  <div class="playlist-item-info">
+    <a [routerLink]="'/playlist/' + playlist.id" class="playlist-name">{{playlist.name}}</a>
+  </div>
 </div>
 

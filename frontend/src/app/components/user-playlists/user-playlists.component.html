@@ -1,7 +1,12 @@
 <div class="user-playlist-container">
     <div class="playlist-container">
         <div *ngFor="let playlist of playlists" >
-            <playlist-item [playlist]=playlist>
+            <playlist-item [playlist]=playlist
+            (stopPlaying)="stopCurrentPlaylist(true)"
+            (playPlaylist)="playCurrentPlaylist(true)"
+            (playAnotherPlaylist)="changeCurrentPlaylistPlaying(playlist)"
+            [isPlaying]="!currentPlaylistStopped"
+            [isCurrentPlaylistPlaying]="currentPlaylistPlaying === playlist">
             </playlist-item>
         </div>
     </div>

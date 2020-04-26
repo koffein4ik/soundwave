@@ -25,8 +25,14 @@ export class PlaylistItemComponent implements OnInit, OnChanges {
   @Input()
   isPlaying: boolean = false;
 
+  @Input()
+  isCurrentPlaylistPlaying: boolean = false;
+
   @Output()
   playPlaylist = new EventEmitter<any>();
+
+  @Output()
+  playAnotherPlaylist = new EventEmitter<any>();
 
   @Output()
   stopPlaying = new EventEmitter<any>();
