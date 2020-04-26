@@ -1,4 +1,6 @@
-<input placeholder="What do you want to search for" #searchInput>
-<button mat-raised-button color="primary" (click)="performSearch(searchInput.value)">
-  Search
-</button>
+<div class="search-input-container">
+  <input class="search-input" placeholder="What do you want to search for" #searchInput>
+  <button class="search-button" mat-button color="primary" (click)="performSearch(searchInput.value)">
+    <mat-icon mat-list-icon>search</mat-icon>
+  </button>
+</div>
