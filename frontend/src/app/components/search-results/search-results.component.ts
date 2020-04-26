@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search/search.service";
 import {ActivatedRoute} from "@angular/router";
 import {SearchResults} from "../../models/search-results.model";
 import {Playlist} from "../../models/playlist.model";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'app-search-results',
@@ -31,6 +32,11 @@ export class SearchResultsComponent implements OnInit {
           id: 0,
           pictureURL: ''
         };
+        this.searchResultsPlaylist.songs.forEach(song => {
+          song.url = ConstantsEnum.backURL + ConstantsEnum.songs + song.url;
+          song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
+        });
+        console.log(this.searchResultsPlaylist);
       });
     });
     //this.searchService.search(searchText).subscribe(results => console.log(results));

@@ -15,11 +15,11 @@
       width: 100%;
     }
   }
-  
+
   .bubble-container{
     position: absolute;
     top: 0px;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,10 +40,11 @@
       left: 14px;
       border-radius: 6px;
       background-color:#ffdb4d;
-    }  
+    }
   }
-  
+
   .song-image-container {
+    background-size: contain;
     display: inline-block;
     position: relative;
     width: 50px;
@@ -63,12 +64,12 @@
       padding: 0;
       min-width: 50px;
     }
-  
+
     & > *{
       background: rgba(0,0,0,.55);
-    } 
+    }
   }
-  
+
   .song-info-container {
     margin-left: 10px;
     width: 250px;
@@ -79,11 +80,11 @@
       margin: 0;
     }
   }
-  
+
   @keyframes bubble_out{
     0%,100%{
       transform: scale(.66);
-    } 
+    }
     50%{
       transform: scale(1);
     }

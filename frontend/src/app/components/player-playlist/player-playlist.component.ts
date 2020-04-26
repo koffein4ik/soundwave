@@ -33,7 +33,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3"
+      id: 231, url:"https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3"
     },
     {
       name: "4 украинки",
@@ -43,7 +43,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/9185888.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/9185888.mp3"
     },
     {
       name: "саб урбан",
@@ -53,7 +53,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -63,7 +63,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -73,7 +73,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -83,7 +83,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -93,7 +93,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -103,7 +103,7 @@ export class PlayerPlaylistComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
     }
   ];
 
@@ -123,12 +123,12 @@ export class PlayerPlaylistComponent implements OnInit {
         this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
       }
     });
-    this.currentPlaylist = {
-      name: "Initial",
-      id: 1,
-      pictureURL: "test",
-      songs: this.playlistSongs
-    };
+    // this.currentPlaylist = {
+    //   name: "Initial",
+    //   id: 1,
+    //   pictureURL: "test",
+    //   songs: this.playlistSongs
+    // };
     if (this.authService.hasValidToken()) {
       this.playlistService.getUserPlaylists().subscribe((data: Playlist[]) => {
         this.playlists = data;
@@ -138,6 +138,7 @@ export class PlayerPlaylistComponent implements OnInit {
   }
 
   public playSongFromPlaylist(playlist: Playlist, index: number): void {
+    console.log(playlist);
     this.currentPlaylist = playlist;
     this.currentSongPlaying = this.currentPlaylist.songs[index];
     this.currentSongStopped = false;

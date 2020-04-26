@@ -1,4 +1,4 @@
-<div class="songs-list-container">
+<div class="songs-list-container" *ngIf="currentPlaylist">
     <div *ngFor="let song of currentPlaylist.songs">
       <app-song-item [song] = song
                      (changeSong)="changeCurrentSongPlaying(song)"

@@ -31,6 +31,7 @@ export class PlaylistSongComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.song);
   }
 
   get songIconVisibility(): string

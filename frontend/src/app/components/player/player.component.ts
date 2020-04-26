@@ -101,7 +101,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.song = playlist.songs[index];
     this.playlist = playlist;
     this.index = index;
-    this.playStream(this.song.songURL);
+    this.playStream(this.song.url);
   }
 
   public resumeCurrentSong() {
@@ -128,7 +128,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   get songImage() : string {
-    return  (this.song && this.song.album && this.song.album.pictureURL) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
+    return  (this.song && this.song.picture_url) || 'https://miraman.ru/imagetransform/quality_95_width_1920_height_1080_fit_2/uploads/protected/000/000/030/186.jpg';
   }
 
   get volumeIcon() : string {
@@ -172,7 +172,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
           this.next();
         else
         {
-          this.playStream(this.song.songURL);
+          this.playStream(this.song.url);
           this.pause()
         }
       }
@@ -217,7 +217,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
     this.index = index;
     this.song = this.playlist.songs[index];
-    this.playStream(this.song.songURL);
+    this.playStream(this.song.url);
   }
 
 

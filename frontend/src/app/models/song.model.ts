@@ -4,7 +4,8 @@ import {Artist} from "./artist.model";
 export class Song {
   id: number;
   name: string;
-  songURL: string;
+  url: string;
   artist: Artist;
   album: Album;
+  picture_url: string;
 }

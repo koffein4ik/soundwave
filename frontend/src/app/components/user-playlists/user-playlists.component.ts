@@ -25,7 +25,7 @@ export class UserPlaylistsComponent implements OnInit {
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
       id: 231,
-      songURL: "https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3"
+      url: "https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3"
     },
     {
       name: "4 украинки",
@@ -35,7 +35,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/9185888.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/9185888.mp3"
     },
     {
       name: "саб урбан",
@@ -45,7 +45,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -55,7 +55,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -65,7 +65,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -75,7 +75,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -85,7 +85,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     },
     {
       name: "саб урбан",
@@ -95,7 +95,7 @@ export class UserPlaylistsComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, songURL: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
     }
   ];
 

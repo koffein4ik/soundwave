@@ -1,6 +1,6 @@
 <mat-drawer-container class="drawer-container" [hasBackdrop]="true">
   <mat-drawer #drawer [mode]="'over'" [position]="'end'">
-    <div class="playlist-container">
+    <div class="playlist-container" *ngIf="currentPlaylist">
       <div *ngFor="let song of currentPlaylist.songs">
         <app-playlist-song [song] = song
                            (changeSong)="changeCurrentSongPlaying(song)"

@@ -1,6 +1,6 @@
 <div class="playlist-song-container">
   <div class="playlist-song-content"  (mouseenter)="hover = 'visible';" (mouseleave)="hover = 'hidden';">
-    <div class="song-image-container" [style.background-image]="'url(' + song.album.pictureURL + ')'">
+    <div class="song-image-container" [style.background-image]="'url(' + song?.picture_url + ')'">
       <button mat-button [style.visibility]="songIconVisibility" (click)="playSong()" *ngIf="currentSongStopped || currentSongPlaying !== song" >
         <mat-icon mat-list-icon>play_circle_filled</mat-icon>
       </button>
@@ -13,7 +13,7 @@
     </div>
     <div class="song-info-container">
       <p>{{song.name}}</p>
-      <p>{{song.artist.name}}</p>
+      <p>{{song?.artist?.name}}</p>
     </div>
   </div>
 </div>
