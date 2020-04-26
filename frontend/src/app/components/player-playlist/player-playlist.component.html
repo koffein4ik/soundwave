@@ -4,8 +4,8 @@
       <div *ngFor="let song of currentPlaylist.songs">
         <app-playlist-song [song] = song
                            (changeSong)="changeCurrentSongPlaying(song)"
-                           (stopCurrentSong)="stopCurrentSong()"
-                           (playCurrentSong)="playCurrentSong()"
+                           (stopCurrentSong)="stopCurrentSong(true)"
+                           (playCurrentSong)="playCurrentSong(true)"
                            [currentSongStopped]="currentSongStopped"
                            [currentSongPlaying]="currentSongPlaying">
         </app-playlist-song>

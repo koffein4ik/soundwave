@@ -61,8 +61,8 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
     this.playerStateService.playPlaylistObservable$.pipe(skip(1)).subscribe((data: {playlist: Playlist, indexInPlaylist: number, sender: string}) => {
       if (data.sender !== this.componentName) {
-        console.log("play selected song from player")
-        console.log(data)
+        console.log("play selected song from player");
+        console.log(data);
         this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
       }
     });
@@ -70,16 +70,16 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       //TODO implement method for stopping current song
       if (sender !== this.componentName) {
-        this.pauseCurrentSong()
-        console.log("pause selected song from player")
+        this.pauseCurrentSong();
+        console.log("pause selected song from player");
       }
     });
 
     this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       //TODO implement method fore resuming current song
       if (sender !== this.componentName) {
-        this.resumeCurrentSong()
-        console.log("resume selected song from player")
+        this.resumeCurrentSong();
+        console.log("resume selected song from player");
       }
     });
   }
@@ -99,7 +99,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   public playSongFromPlaylist(playlist: Playlist, index: number) {
     this.song = playlist.songs[index];
-    this.playlist = playlist
+    this.playlist = playlist;
     this.index = index;
     this.playStream(this.song.songURL);
   }
@@ -214,7 +214,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     };
     console.log(data)
     this.playerStateService.playPlaylist.next(data);
-    
+
     this.index = index;
     this.song = this.playlist.songs[index];
     this.playStream(this.song.songURL);
@@ -225,7 +225,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.audioService.seekTo(change.value);
   }
 
-  // volume section 
+  // volume section
 
   onVolumeSliderChangeEnd(change) {
     this.volume = change.value;

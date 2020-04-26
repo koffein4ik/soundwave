@@ -21,6 +21,9 @@ export class SongItemComponent implements OnInit {
   playCurrentSong = new EventEmitter<any>();
 
   @Output()
+  changeSong = new EventEmitter<any>();
+
+  @Output()
   stopCurrentSong = new EventEmitter<any>();
 
   hover: string = 'hidden';
@@ -53,5 +56,11 @@ export class SongItemComponent implements OnInit {
     return 'hidden'
   }
 
+  playSong(){
+    if(this.song != this.currentSongPlaying)
+      this.changeSong.emit();
+    else
+      this.playCurrentSong.emit()
+  }
 
 }

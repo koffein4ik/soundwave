@@ -110,12 +110,12 @@ export class PlayerPlaylistComponent implements OnInit {
   public ngOnInit(): void {
     this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       if (sender !== this.componentName) {
-        this.stopCurrentSong();
+        this.stopCurrentSong(false);
       }
     });
     this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       if (sender !== this.componentName) {
-        this.playCurrentSong();
+        this.playCurrentSong(false);
       }
     });
     this.playerStateService.playPlaylistObservable$.pipe(skip(1)).subscribe((data: {playlist: Playlist, indexInPlaylist: number, sender: string}) => {
@@ -148,24 +148,27 @@ export class PlayerPlaylistComponent implements OnInit {
   }
 
   public changeCurrentSongPlaying(song: Song): void {
-    console.log("choose song in playlist")
     const data = {
       playlist: this.currentPlaylist,
       indexInPlaylist: this.currentPlaylist.songs.indexOf(song),
-      sender: "player-playlist"
+      sender: this.componentName
     };
     this.playerStateService.playPlaylist.next(data);
     this.currentSongPlaying = song;
     this.currentSongStopped = false;
   }
 
-  public stopCurrentSong(): void {
-    this.playerStateService.pauseCurrentSong.next(this.componentName);
+  public stopCurrentSong(emitNext: boolean): void {
+    if (emitNext) {
+      this.playerStateService.pauseCurrentSong.next(this.componentName);
+    }
     this.currentSongStopped = true;
   }
 
-  public playCurrentSong(): void {
-    this.playerStateService.resumeCurrentSong.next(this.componentName);
+  public playCurrentSong(emitNext: boolean): void {
+    if (emitNext) {
+      this.playerStateService.resumeCurrentSong.next(this.componentName);
+    }
     this.currentSongStopped = false;
   }
 

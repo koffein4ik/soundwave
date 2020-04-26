@@ -1,6 +1,11 @@
 <div class="songs-list-container">
-    <div *ngFor="let song of playlistSongs">
-      <app-song-item [song] = song>
+    <div *ngFor="let song of currentPlaylist.songs">
+      <app-song-item [song] = song
+                     (changeSong)="changeCurrentSongPlaying(song)"
+                     (stopCurrentSong)="stopCurrentSong(true)"
+                     (playCurrentSong)="playCurrentSong(true)"
+                     [currentSongStopped]="currentSongStopped"
+                     [currentSongPlaying]="currentSongPlaying">
       </app-song-item>
     </div>
   </div>
