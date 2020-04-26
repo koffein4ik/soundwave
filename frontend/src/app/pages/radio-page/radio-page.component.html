@@ -1,1 +1,9 @@
-
+<div class="genre-picker-wrapper">
+    <div class="genre-picker-container">
+        <app-genre-item *ngFor="let genre of genres; let i = index"
+            [genre]=genre
+            [color]="getColor(i)"
+            (onClick)="chooseGenre(i)">
+        </app-genre-item>
+    </div>
+</div>

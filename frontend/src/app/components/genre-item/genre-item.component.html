@@ -1,1 +1,9 @@
-<p>genre-item works!</p>
+<div class="gente-item-container" (mouseover)="hover=true" (mouseleave)="hover=false" [style.border-color]="hoverColor"> 
+    <div class="genre-icon-container"
+        [style.background-color]="color">
+        <img class="genre-icon" [src]="imgSrc">
+    </div>
+    <div class="genre-info-container">
+        <span [style.color]="textColor" (click)="onClick.emit()">{{genre.name}}</span>
+    </div>
+</div>
