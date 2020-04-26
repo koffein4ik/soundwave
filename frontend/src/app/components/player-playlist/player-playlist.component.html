@@ -3,8 +3,9 @@
     <div class="playlist-container">
       <div *ngFor="let song of currentPlaylist.songs">
         <app-playlist-song [song] = song
-                           (playCurrentSong)="changeCurrentSongPlaying(song)"
+                           (changeSong)="changeCurrentSongPlaying(song)"
                            (stopCurrentSong)="stopCurrentSong()"
+                           (playCurrentSong)="playCurrentSong()"
                            [currentSongStopped]="currentSongStopped"
                            [currentSongPlaying]="currentSongPlaying">
         </app-playlist-song>
@@ -15,12 +16,5 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
-<app-player (toggleDrawer)="toggleDrawer(drawer)"
-            [song]="currentSongPlaying"
-            [songPlaylistSize]="currentPlaylist.songs.length"
-            [currentSongIndex]="playlistSongs.indexOf(currentSongPlaying)"
-            [playlists]="playlists"
-            (stopCurrentSong)="stopCurrentSong()"
-            (playCurrentSong)="playCurrentSong()"
-            [currentSongStopped]="currentSongStopped">
+<app-player (toggleDrawer)="toggleDrawer(drawer)">
 </app-player>

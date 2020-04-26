@@ -34,6 +34,8 @@ import { UserPlaylistsComponent } from './components/user-playlists/user-playlis
 import { PlaylistItemComponent } from './components/playlist-item/playlist-item.component';
 import { RadioPageComponent } from './pages/radio-page/radio-page.component';
 import { GenreItemComponent } from './components/genre-item/genre-item.component';
+import { SongItemComponent } from './components/song-item/song-item.component';
+import { SongsListComponent } from './components/songs-list/songs-list.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { GenreItemComponent } from './components/genre-item/genre-item.component
     PlaylistItemComponent,
     RadioPageComponent,
     GenreItemComponent,
+    SongItemComponent,
+    SongsListComponent,
   ],
   imports: [
     BrowserModule,

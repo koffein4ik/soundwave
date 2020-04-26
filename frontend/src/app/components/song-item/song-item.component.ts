@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Song} from "../../models/song.model";
 
 @Component({
-  selector: 'app-playlist-song',
-  templateUrl: './playlist-song.component.html',
-  styleUrls: ['./playlist-song.component.less']
+  selector: 'app-song-item',
+  templateUrl: './song-item.component.html',
+  styleUrls: ['./song-item.component.less']
 })
-export class PlaylistSongComponent implements OnInit {
+export class SongItemComponent implements OnInit {
 
   @Input()
   song: Song;
@@ -19,9 +19,6 @@ export class PlaylistSongComponent implements OnInit {
 
   @Output()
   playCurrentSong = new EventEmitter<any>();
-
-  @Output()
-  changeSong = new EventEmitter<any>();
 
   @Output()
   stopCurrentSong = new EventEmitter<any>();
@@ -56,14 +53,5 @@ export class PlaylistSongComponent implements OnInit {
     return 'hidden'
   }
 
-  playSong(){
-    if(this.song != this.currentSongPlaying)
-      this.changeSong.emit();
-    else
-      this.playCurrentSong.emit()
-  }
 
 }
-
-
-//      <img [src]="song.album.pictureURL">

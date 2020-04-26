@@ -17,6 +17,7 @@ import {Song} from "../../models/song.model";
 import {Playlist} from "../../models/playlist.model";
 import {AuthService} from "../../services/auth/auth.service";
 import {PlayerStateService} from "../../services/player-state/player-state.service";
+import {skip} from "rxjs/operators";
 
 @Component({
   selector: 'app-player',
@@ -28,38 +29,15 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   @Output()
   toggleDrawer = new EventEmitter<any>();//появляется плейлист
 
-  @Output()
-  stopCurrentSong = new EventEmitter<any>();//remove
-
-  @Output()
-  playCurrentSong = new EventEmitter<any>();//remove
-
-  @Output()
-  playNextSong = new EventEmitter<any>();//remove
-
-  @Output()
-  playPreviousSong = new EventEmitter<any>();//remove
-
-  @Input()
-  song: Song;//remove
-
-  @Input()
-  currentSongStopped: boolean;//remove
-
-  @Input()
-  currentSongIndex: number;//remove
-
-  @Input()
-  songPlaylistSize: number;//remove
-
-  @Input()
-  playlists: Playlist[];//remove
-
+  song: Song;
   state: StreamState;
   currentFile: Song;
   isVolumeChanging: string = "hidden";
   showPlaylist: boolean = false;
   volume: number = 0.3;
+  componentName: string = "player-component";
+  playlist: Playlist;
+  index: number;
 
   private clicks = new Subject();
   private subscription: Subscription;
@@ -73,52 +51,65 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       this.state = state;
     });
 
-    this.volume = Number(localStorage.getItem("playerVolume") || 0.3);
-    this.audioService.volume =  this.volume * this.volume;
+    this.restoreVolume();
   }
 
   ngOnInit() {
     this.subscription = this.clicks.pipe(
       throttleTime(400)
     ).subscribe(e => this.toggleDrawer.emit());
-    this.playerStateService.playPlaylistObservable$.subscribe((data: {playlist: Playlist, indexInPlaylist: number}) => {
+
+    this.playerStateService.playPlaylistObservable$.pipe(skip(1)).subscribe((data: {playlist: Playlist, indexInPlaylist: number, sender: string}) => {
+      if (data.sender !== this.componentName) {
+        console.log("play selected song from player")
+        console.log(data)
         this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
+      }
     });
-    this.playerStateService.pauseCurrentSongObservable$.subscribe(() => {
+
+    this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       //TODO implement method for stopping current song
+      if (sender !== this.componentName) {
+        this.pauseCurrentSong()
+        console.log("pause selected song from player")
+      }
     });
-    this.playerStateService.resumeCurrentSongObservable$.subscribe(() => {
+
+    this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       //TODO implement method fore resuming current song
+      if (sender !== this.componentName) {
+        this.resumeCurrentSong()
+        console.log("resume selected song from player")
+      }
     });
   }
 
   ngOnDestroy() {
-    localStorage.setItem("playerVolume", this.volume.toString());
     this.subscription.unsubscribe();
   }
 
   //TODO REMOVE
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("change");
-    console.log(changes);
-    if (changes.song) {
-      if(changes.song.currentValue && changes.song.currentValue.songURL )
-      this.playStream(changes.song.currentValue.songURL);
-      console.log('song changed or continued');
-    }
-    if (changes.currentSongStopped) {
-      if(changes.currentSongStopped.currentValue)
-        this.pause();
-      else
-      {
-        this.play();
-      }
-      console.log(changes.currentSongStopped);
-    }
+  }
+
+  private restoreVolume(defaultVolume : number = 0.3){
+    this.volume = Number(localStorage.getItem("playerVolume") || defaultVolume);
+    this.audioService.volume =  this.volume * this.volume;
   }
 
   public playSongFromPlaylist(playlist: Playlist, index: number) {
-    //TODO
+    this.song = playlist.songs[index];
+    this.playlist = playlist
+    this.index = index;
+    this.playStream(this.song.songURL);
+  }
+
+  public resumeCurrentSong() {
+    this.audioService.play();
+  }
+
+  public pauseCurrentSong() {
+    this.audioService.pause();
   }
 
   public toggleClick(): void {
@@ -163,11 +154,13 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   // }
 
   isFirstPlaying() {
-    return this.currentSongIndex === 0;
+    if(this.song)
+      return this.index === 0;
   }
 
   isLastPlaying() {
-    return this.currentSongIndex === this.songPlaylistSize - 1;
+    if(this.song)
+      return this.index === this.playlist.songs.length - 1;
   }
 
   playStream(url) {
@@ -179,46 +172,60 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
           this.next();
         else
         {
-          this.stop();
           this.playStream(this.song.songURL);
+          this.pause()
         }
       }
     });
   }
 
   pause() {
-    this.playerStateService.pauseCurrentSong.next("STOP");
     this.audioService.pause();
-    this.stopCurrentSong.emit();
+    this.playerStateService.pauseCurrentSong.next(this.componentName);
   }
 
   play() {
-    console.log("play");
     if(this.song)
     {
       this.audioService.play();
-      this.playCurrentSong.emit();
+      this.playerStateService.resumeCurrentSong.next(this.componentName);
     }
   }
 
   stop() {
     this.audioService.stop();
-    this.stopCurrentSong.emit();
   }
 
   next() {
     this.audioService.stop();
-    this.playNextSong.emit();
+    this.changeSongIndex(this.index + 1)
   }
 
   previous() {
     this.audioService.stop();
-    this.playPreviousSong.emit();
+    this.changeSongIndex(this.index - 1)
   }
+
+  public changeSongIndex(index: number): void {
+    const data = {
+      playlist: this.playlist,
+      indexInPlaylist: index,
+      sender: this.componentName
+    };
+    console.log(data)
+    this.playerStateService.playPlaylist.next(data);
+    
+    this.index = index;
+    this.song = this.playlist.songs[index];
+    this.playStream(this.song.songURL);
+  }
+
 
   onSliderChangeEnd(change) {
     this.audioService.seekTo(change.value);
   }
+
+  // volume section 
 
   onVolumeSliderChangeEnd(change) {
     this.volume = change.value;
@@ -227,8 +234,10 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
   }
 
   onChangeVolume() {
-    this.isVolumeChanging = this.isVolumeChanging == "hidden" ? "visible" : "hidden";
+    this.isVolumeChanging = (this.isVolumeChanging == "hidden") ? "visible" : "hidden";
   }
+
+  // user features section
 
   showCurrentPlaylist() {
     this.showPlaylist = false;

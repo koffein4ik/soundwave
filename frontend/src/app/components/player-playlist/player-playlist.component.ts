@@ -110,12 +110,10 @@ export class PlayerPlaylistComponent implements OnInit {
   public ngOnInit(): void {
     this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       if (sender !== this.componentName) {
-        console.log('triggered');
         this.stopCurrentSong();
       }
     });
     this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
-      console.log('resume');
       if (sender !== this.componentName) {
         this.playCurrentSong();
       }
@@ -140,9 +138,9 @@ export class PlayerPlaylistComponent implements OnInit {
   }
 
   public playSongFromPlaylist(playlist: Playlist, index: number): void {
-    console.log("плей йопт");
     this.currentPlaylist = playlist;
-    this.currentSongPlaying = this.currentPlaylist[index];
+    this.currentSongPlaying = this.currentPlaylist.songs[index];
+    this.currentSongStopped = false;
   }
 
   public toggleDrawer(drawer): void {
@@ -150,6 +148,7 @@ export class PlayerPlaylistComponent implements OnInit {
   }
 
   public changeCurrentSongPlaying(song: Song): void {
+    console.log("choose song in playlist")
     const data = {
       playlist: this.currentPlaylist,
       indexInPlaylist: this.currentPlaylist.songs.indexOf(song),
