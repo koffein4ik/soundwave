@@ -5,6 +5,8 @@ module.exports = Object.freeze({
 
     // PLAYLISTS
     FIND_PLAYLISTS_BY_USER_ID: 'SELECT name, playlist_id FROM PLAYLIST WHERE user_id = ?',
+    INSERT_INTO_PLAYLIST: 'INSERT INTO PLAYLIST(name, user_id, picture_url) VALUES (?, ?, ?)',
+
 
 
     //SEARCH

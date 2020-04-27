@@ -29,3 +29,7 @@ exports.findAllGenres = async function() {
     return await executeQuery(sqlQueries.FIND_ALL_GENRES);
 };
 
+exports.createPlaylist = async function(name, user_id, picture_url) {
+    return await executeQuery(sqlQueries.INSERT_INTO_PLAYLIST, [name, user_id, picture_url]);
+}
+
