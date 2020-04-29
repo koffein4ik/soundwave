@@ -1,7 +1,9 @@
 const express = require("express");
 const genreController = require('../controllers/genreController');
-const playlistRouter = express.Router();
+const genreRouter = express.Router();
 
-playlistRouter.get("/", genreController.getGenres);
+genreRouter.get("/", genreController.getGenres);
 
-module.exports = playlistRouter;
+genreRouter.get("/getsongsbygenreid/:id", genreController.getSongByGenreId);
+
+module.exports = genreRouter;

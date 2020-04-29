@@ -1,0 +1,17 @@
+<div class="item-info-container">
+  <div calss="item-info-picture-container">
+    <img [src]="pictureURL">
+  </div>
+
+  <div class="item-name-container">
+    <p>{{name}}</p>
+  </div>
+
+  <div class="item-albums-container">
+    <div *ngFor="let album of albums"></div>
+  </div>
+
+  <div class="item-songs-container">
+    <app-songs-list [currentPlaylist]="playlist"></app-songs-list>
+  </div>
+</div>

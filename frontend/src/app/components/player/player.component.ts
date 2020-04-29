@@ -63,7 +63,9 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
       if (data.sender !== this.componentName) {
         console.log("play selected song from player");
         console.log(data);
-        this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
+        if (data && data.playlist && data.playlist.songs[data.indexInPlaylist]) {
+          this.playSongFromPlaylist(data.playlist, data.indexInPlaylist);
+        }
       }
     });
 

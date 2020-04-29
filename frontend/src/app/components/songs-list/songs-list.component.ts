@@ -38,7 +38,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/9185888.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/9185888.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -48,7 +49,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -58,7 +60,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -68,7 +71,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -78,7 +82,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -88,7 +93,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
@@ -98,7 +104,8 @@ export class SongsListComponent implements OnInit {
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     }
   ];
 

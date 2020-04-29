@@ -29,7 +29,12 @@ exports.findAllGenres = async function() {
     return await executeQuery(sqlQueries.FIND_ALL_GENRES);
 };
 
+exports.getSongsByGenreId = async function(id) {
+    console.log(id);
+    return await executeQuery(sqlQueries.FIND_SONGS_BY_GENRE_ID, id);
+};
+
 exports.createPlaylist = async function(name, user_id, picture_url) {
     return await executeQuery(sqlQueries.INSERT_INTO_PLAYLIST, [name, user_id, picture_url]);
-}
+};
 

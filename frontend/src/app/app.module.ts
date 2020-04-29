@@ -40,6 +40,10 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import {MatTabsModule} from "@angular/material/tabs";
 import { SearchResultsItemComponent } from './components/search-results-item/search-results-item.component';
 import { SearchResultsArtistsComponent } from './components/search-results-artists/search-results-artists.component';
+import { ArtistInfoComponent } from './pages/artist-info/artist-info.component';
+import { AlbumInfoComponent } from './pages/album-info/album-info.component';
+import { PlaylistInfoComponent } from './pages/playlist-info/playlist-info.component';
+import { ItemInfoComponent } from './components/item-info/item-info.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +67,10 @@ import { SearchResultsArtistsComponent } from './components/search-results-artis
     SearchResultsComponent,
     SearchResultsItemComponent,
     SearchResultsArtistsComponent,
+    ArtistInfoComponent,
+    AlbumInfoComponent,
+    PlaylistInfoComponent,
+    ItemInfoComponent,
   ],
   imports: [
     BrowserModule,
