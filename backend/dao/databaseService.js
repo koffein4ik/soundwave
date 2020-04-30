@@ -38,3 +38,7 @@ exports.createPlaylist = async function(name, user_id, picture_url) {
     return await executeQuery(sqlQueries.INSERT_INTO_PLAYLIST, [name, user_id, picture_url]);
 };
 
+exports.getAtristInfo = async function(artist_id) {
+    return await executeQuery(sqlQueries.FIND_ALBUMS_OF_ARTIST_WITH_SONGS,artist_id);
+};
+

@@ -18,8 +18,17 @@ module.exports = Object.freeze({
         'LEFT JOIN ARTIST ON SONG_ARTIST.artist_id = ARTIST.artist_id WHERE SONGS.name LIKE ?',
 
     //Genres
-    FIND_ALL_GENRES: 'SELECT * FROM genres',
-    FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name, artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on songs.song_id = sa.song_id join artist on sa.artist_id = artist.artist_id join album on songs.album_id = album.album_id where songs.genre_id= ?'
+    
+	FIND_ALL_GENRES: 'SELECT * FROM genres',
+    FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name,'+
+        'artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on songs.song_id = sa.song_id '+
+        'join artist on sa.artist_id = artist.artist_id join album on songs.album_id = album.album_id where songs.genre_id= ?',
     //FIND_SONGS_BY_GENRE_ID: 'SELECT * FROM SONGS WHERE genre_id = ?'
 
+	//ARTIST
+    FIND_ALBUMS_OF_ARTIST_WITH_SONGS:'SELECT ALBUM.album_id, ALBUM.name AS album_name, ALBUM.picture_url '+
+        'AS album_picture_url, SONGS.song_id, SONGS.name AS song_name, SONGS.url, ARTIST.artist_id,'+
+        'ARTIST.name AS artist_name, ARTIST.picture_url AS artist_picture_url FROM ALBUM '+
+        'LEFT JOIN SONGS USING(album_id) LEFT JOIN SONG_ARTIST USING(song_id)' +
+        'LEFT JOIN ARTIST ON SONG_ARTIST.artist_id = ARTIST.artist_id WHERE ALBUM.artist_id = ?',
 });
