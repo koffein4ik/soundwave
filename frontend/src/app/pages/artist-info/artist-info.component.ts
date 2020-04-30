@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ArtistService} from "../../services/artist/artist.service";
 
 @Component({
   selector: 'app-artist-info',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.artistService.getArtistInfoById(1).subscribe(data => {
+      console.log(data);
+    })
   }
 
 }

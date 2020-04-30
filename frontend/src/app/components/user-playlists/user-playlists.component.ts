@@ -19,7 +19,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "Now it's perfect",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -31,7 +31,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "4 украинки",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -42,7 +42,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -53,7 +53,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -64,7 +64,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -75,7 +75,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -86,7 +86,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,
@@ -97,7 +97,7 @@ export class UserPlaylistsComponent implements OnInit {
     {
       name: "саб урбан",
       picture_url: '',
-      artist: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: {name: "ширан", artist_id: 123, picture_url: ''},
       album: {
         name: "first",
         id: 123,

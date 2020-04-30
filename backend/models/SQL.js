@@ -20,9 +20,10 @@ module.exports = Object.freeze({
     //Genres
     
 	FIND_ALL_GENRES: 'SELECT * FROM genres',
-    FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name,'+
-        'artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on songs.song_id = sa.song_id '+
-        'join artist on sa.artist_id = artist.artist_id join album on songs.album_id = album.album_id where songs.genre_id= ?',
+    FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name, ' +
+        'artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on ' +
+        'songs.song_id = sa.song_id join artist on sa.artist_id = artist.artist_id join album on ' +
+        'songs.album_id = album.album_id where songs.genre_id= ? ORDER BY songs.song_id',
     //FIND_SONGS_BY_GENRE_ID: 'SELECT * FROM SONGS WHERE genre_id = ?'
 
 	//ARTIST

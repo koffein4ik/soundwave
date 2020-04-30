@@ -1,9 +1,14 @@
 <div class="genre-picker-wrapper">
-    <div class="genre-picker-container">
-        <app-genre-item *ngFor="let genre of genres; let i = index"
-            [genre]=genre
-            [color]="getColor(i)"
-            (onClick)="chooseGenre(i)">
-        </app-genre-item>
+  <div class="genre-picker-container">
+    <app-genre-item *ngFor="let genre of genres; let i = index"
+                    [genre]=genre
+                    [color]="getColor(i)"
+                    (onClick)="chooseGenre(i)">
+    </app-genre-item>
+  </div>
+  <div class="current-chosen-radio-genre-container" *ngIf="currentChosenGenreIndex >= 0">
+    <div class="current-chosen-radio-genre-name-container">
+      {{genres[currentChosenGenreIndex].name}}
     </div>
+  </div>
 </div>

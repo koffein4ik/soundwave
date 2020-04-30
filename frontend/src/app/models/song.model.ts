@@ -5,7 +5,7 @@ export class Song {
   id: number;
   name: string;
   url: string;
-  artist: Artist;
+  artists: Artist[];
   album: Album;
   picture_url: string;
 }

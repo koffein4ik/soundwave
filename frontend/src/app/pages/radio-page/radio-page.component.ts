@@ -13,6 +13,7 @@ import {ConstantsEnum} from "../../constants/ConstantsEnum";
 export class RadioPageComponent implements OnInit {
 
   private genres: Genre[];
+  private currentChosenGenreIndex: number = -1;
   private componentName: String = 'radio-page';
   colors: string[] = ["ff6665", "3779bc", "6c65a9", "59cd9c", "a5c94d", "ffbb5a", "6fc3e0", "3333ff", "e43c31", "c44f69", "9d65a9"];
 
@@ -31,10 +32,11 @@ export class RadioPageComponent implements OnInit {
 
   public chooseGenre(index: number): void {
     this.genreService.getSongsByGenreId(this.genres[index].genre_id).subscribe(data => {
+      console.log(data);
       const playlist: Playlist = {
         id: 0,
         name: this.genres[index].name + '-radio',
-        songs: data,
+        songs: this.shuffle(data),
         pictureURL: ''
       };
       const dataToEmit = {
@@ -47,7 +49,27 @@ export class RadioPageComponent implements OnInit {
         song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
       });
       this.playerStateService.playPlaylist.next(dataToEmit);
+      this.currentChosenGenreIndex = index;
     });
+  }
+
+  public shuffle(array): any {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
 }
