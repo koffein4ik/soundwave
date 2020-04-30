@@ -13,8 +13,11 @@ exports.findSongsAndItsArtistsInDB = async function(searchRow){
     var result = [], artistsArray = [];
     var nextSongId;
     for (var i =0; i < searchSongsResult.length; i++){
-        try { nextSongId = searchSongsResult[i+1].song_id } 
-        catch { nextSongId = null };
+        if (i < searchSongsResult.length - 1){
+            nextSongId = searchSongsResult[i+1].song_id
+        } else {
+            nextSongId = null
+        }
 
         artistsArray.push({
             artist_id: searchSongsResult[i].artist_id,
