@@ -3,7 +3,8 @@ const songConverter = require('../converters/songConverter');
 
 exports.getArtistInfo = async function(artistID){
     const searchResult = await databaseService.getAtristInfo(artistID);
-    var result = new Object(), songsArray = [], artistsArray = [];
+    var result = new Object(), songsArray = [];
+
     var nextAlbumId, j = -1;
     
     if (searchResult.length > 0) {
@@ -30,6 +31,7 @@ exports.getArtistInfo = async function(artistID){
             nextAlbumId = null
         }
 
+        songsArray.push(searchResult[i]);
 
         if(searchResult[i].album_id != nextAlbumId){
             const songsWithArtists = songConverter.getSongsWithArrayOfArtists(songsArray);
@@ -41,7 +43,7 @@ exports.getArtistInfo = async function(artistID){
                 songs: songsModels
             });
             songsArray = [];
-            result.songs.push(songsModels);
+            result.songs =result.songs.concat(songsModels);
         }
     }
     return result;
