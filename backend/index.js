@@ -44,6 +44,10 @@ const genreRouter = require("./routers/genreRouter");
 
 app.use("/genres", genreRouter);
 
+const albumRouter = require("./routers/albumRouter");
+
+app.use("/album", albumRouter);
+
 app.get('/', function (req, res) {
     res.send('Hello World!');
     var connection = mysql.createConnection(config.config);

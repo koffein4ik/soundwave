@@ -6,19 +6,24 @@ module.exports = Object.freeze({
     // PLAYLISTS
     FIND_PLAYLISTS_BY_USER_ID: 'SELECT name, playlist_id as `id`, picture_url as `pictureURL` FROM PLAYLIST WHERE user_id = ?',
     INSERT_INTO_PLAYLIST: 'INSERT INTO PLAYLIST(name, user_id, picture_url) VALUES (?, ?, ?)',
-
+    FIND_PLAYLIST_SONGS_BY_ID: 'SELECT playlist.playlist_id, playlist.name AS playlist_name, playlist.user_id,' + 
+    'playlist.picture_url AS playlist_picture_url, songs.song_id, songs.name AS song_name, songs.url,' +
+    'album.picture_url AS album_picture_url, artist.artist_id, artist.name AS artist_name FROM PLAYLIST ' +
+    'LEFT JOIN PLAYLIST_SONG USING(playlist_id) LEFT JOIN SONGS ON playlist_song.song_id = songs.song_id ' +
+    'LEFT JOIN ALBUM USING(album_id) LEFT JOIN SONG_ARTIST ON songs.song_id = song_artist.song_id ' +
+    'LEFT JOIN ARTIST ON song_artist.artist_id = artist.artist_id WHERE playlist.playlist_id = ?',
 
 
     //SEARCH
     FIND_ALBOMS_BY_NAME: 'SELECT * FROM ALBUM WHERE name LIKE ?',
     FIND_ARTISTS_BY_NAME: 'SELECT * FROM ARTIST WHERE name LIKE ?',
     FIND_SONGS_BY_NAME_WITH_ITS_ARTISTS: 'SELECT SONGS.song_id,SONGS.name AS song_name, ' +
-        'SONGS.url, ALBUM.picture_url, SONG_ARTIST.artist_id, ARTIST.name AS artist_name FROM SONGS ' +
+        'SONGS.url, ALBUM.picture_url AS album_picture_url, SONG_ARTIST.artist_id, ARTIST.name AS artist_name FROM SONGS ' +
         'LEFT JOIN ALBUM USING(album_id) LEFT JOIN SONG_ARTIST USING(song_id) ' +
         'LEFT JOIN ARTIST ON SONG_ARTIST.artist_id = ARTIST.artist_id WHERE SONGS.name LIKE ?',
 
-    //Genres
-    
+
+    //Genres   
 	FIND_ALL_GENRES: 'SELECT * FROM genres',
     FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name, ' +
         'artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on ' +
@@ -32,4 +37,11 @@ module.exports = Object.freeze({
         'ARTIST.name AS artist_name, ARTIST.picture_url AS artist_picture_url FROM ALBUM '+
         'LEFT JOIN SONGS USING(album_id) LEFT JOIN SONG_ARTIST USING(song_id)' +
         'LEFT JOIN ARTIST ON SONG_ARTIST.artist_id = ARTIST.artist_id WHERE ALBUM.artist_id = ?',
+
+
+    //ALBUM
+    FIND_ALBUM_SONGS_BY_ID:'SELECT album.album_id, album.name AS album_name, album.picture_url AS album_picture_url,' + 
+    'album.release_date, album.artist_id AS album_artist_id,songs.song_id, songs.name AS song_name, songs.url,' +
+    'artist.artist_id, artist.name AS artist_name FROM ALBUM LEFT JOIN SONGS ON album.album_id = songs.album_id ' +
+    'LEFT JOIN SONG_ARTIST USING(song_id) LEFT JOIN ARTIST ON song_artist.artist_id = artist.artist_id WHERE album.album_id = ?',
 });

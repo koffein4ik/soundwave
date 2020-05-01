@@ -1,11 +1,11 @@
 const fs = require('fs');
 const moment = require('moment');
 const databaseService = require("../dao/databaseService");
+const songConverter = require('../converters/songConverter');
 
 exports.getPlaylistsByUserId = async function(user_id) {
     return await databaseService.getPlaylistsByUserId(user_id);
 };
-
 
 
 exports.createPlaylist = async function(request_body, user_id, host) {
@@ -17,3 +17,21 @@ exports.createPlaylist = async function(request_body, user_id, host) {
     const playlist = await databaseService.createPlaylist(request_body.playlistName, user_id, `${host}/${imagePath}`);
     return playlist;
 };
+
+
+exports.getPlaylistSongsById = async function(playlist_id){
+    const searchResult = await databaseService.getPlaylistSongsById(playlist_id);
+    const songsWithArtists = songConverter.getSongsWithArrayOfArtists(searchResult);
+    const songsModels = songsWithArtists.map(song => songConverter.convertSong(song));
+    const playlist = {
+        playlist_id: searchResult[0].playlist_id,
+        name: searchResult[0].playlist_name,
+        user_id: searchResult[0].user_id,
+        picture_url: searchResult[0].playlist_picture_url
+    }
+    var result = new Object({
+        playlist,
+        songs: songsModels
+    })
+    return result;
+}

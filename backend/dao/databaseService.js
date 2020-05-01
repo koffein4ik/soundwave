@@ -42,3 +42,10 @@ exports.getAtristInfo = async function(artist_id) {
     return await executeQuery(sqlQueries.FIND_ALBUMS_OF_ARTIST_WITH_SONGS,artist_id);
 };
 
+exports.getPlaylistSongsById = async function(playlist_id) {
+    return await executeQuery(sqlQueries.FIND_PLAYLIST_SONGS_BY_ID, playlist_id);
+};
+
+exports.getAlbumSongsById = async function(album_id) {
+    return await executeQuery(sqlQueries.FIND_ALBUM_SONGS_BY_ID, album_id);
+};
