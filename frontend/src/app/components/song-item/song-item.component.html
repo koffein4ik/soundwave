@@ -13,7 +13,7 @@
       </div>
       <div class="song-info-container">
         <p>{{song.name}}</p>
-        <p *ngFor="let artist of song?.artists">{{artist.name}}</p>
+        <span class="song-info-artist-name" *ngFor="let artist of song?.artists">{{artist.name}}</span>
       </div>
     </div>
   </div>
