@@ -10,7 +10,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Albums">
-        <app-search-results-albums [albums]="searchResults.albums">
+        <app-search-results-albums [albums]="searchResults.albums" *ngIf="searchResults?.artists">
         </app-search-results-albums>
       </mat-tab>
     </mat-tab-group>

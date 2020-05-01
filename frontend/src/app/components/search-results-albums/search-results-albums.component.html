@@ -1,1 +1,8 @@
-<p>search-results-albums works!</p>
+<div class="search-results-albums-container">
+    <app-search-results-item *ngFor="let album of albums"
+                             [itemName]="album.name"
+                             [pictureURL]="album.picture_url"
+                             [itemId]="album.album_id"
+                             [urlToGo]="'/album'">
+    </app-search-results-item>
+  </div>
