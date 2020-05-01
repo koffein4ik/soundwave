@@ -10,7 +10,13 @@ exports.createPlaylist = async function(request, response) {
     response.status(201).send(playlist);
 };
 
+exports.addSongToPlaylist = async function(request, response) {
+  console.log(request.body);
+  await playlistService.addSongToPlaylist(request.body.playlistId, request.body.songId);
+  response.status(200).send({"ok": "ok"});
+};
+
 exports.getPlaylistSongsById = async function(request, response) {
     const playlistSongs = await playlistService.getPlaylistSongsById(request.params.id);
     response.status(200).send(playlistSongs)
-}; 
+};

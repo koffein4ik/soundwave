@@ -62,6 +62,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.subscription = this.clicks.pipe(
       throttleTime(400)
     ).subscribe(e => this.toggleDrawer.emit());
+    this.isUserAuthorized = this.authService.hasValidToken();
+    if (this.isUserAuthorized) {
+      this.playlistService.getUserPlaylists().subscribe(data => {
+        this.playlists = data;
+      })
+    }
 
     this.authService.userAuthorizedObservable$.pipe(skip(1)).subscribe(data => {
       this.isUserAuthorized = data;
@@ -265,9 +271,12 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     //TODO: SHOW USERS PLAYLIST AND ADD POSSIBILITY TO ADD SONGS TO THEM
   }
 
-  addToSelectedPlaylist(playlist:any) {
-    console.log(playlist)
-    alert(`song has been added to the playlist ${playlist.name}`)
+  addToSelectedPlaylist(playlist: Playlist) {
+    console.log(playlist);
+    console.log(this.song);
+    this.playlistService.addSongToPlaylist(playlist.id, this.song.id).subscribe(data => {
+      alert(`song has been added to the playlist ${playlist.name}`);
+    });
   }
 
 }

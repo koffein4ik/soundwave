@@ -4,6 +4,7 @@ const playlistRouter = express.Router();
 
 playlistRouter.get("/getplaylists", playlistController.getPlaylistByUserId);
 playlistRouter.post("/createplaylist", playlistController.createPlaylist);
+playlistRouter.post("/addsongtoplaylist", playlistController.addSongToPlaylist);
 playlistRouter.get("/:id", playlistController.getPlaylistSongsById);
 
 module.exports = playlistRouter;

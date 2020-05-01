@@ -25,7 +25,7 @@ export class SearchResultsItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.pictureBackURL = ConstantsEnum.backURL + ConstantsEnum.images + this.urlToGo + '/' + this.pictureURL;
+    this.pictureBackURL = ConstantsEnum.backURL + 'images' + this.urlToGo + '/' + this.pictureURL;
   }
 
 }

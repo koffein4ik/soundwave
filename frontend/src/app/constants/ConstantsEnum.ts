@@ -9,6 +9,7 @@ export enum ConstantsEnum {
   playlistAPIURL = "playlist/",
   getPlaylists = "getplaylists",
   createPlaylist = "createplaylist",
+  addSongToPlaylist = "addsongtoplaylist",
   uploadFile = "upload",
   uploads = "uploads/",
   genres = "genres",

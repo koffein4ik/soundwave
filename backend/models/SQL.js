@@ -6,7 +6,9 @@ module.exports = Object.freeze({
     // PLAYLISTS
     FIND_PLAYLISTS_BY_USER_ID: 'SELECT name, playlist_id as `id`, picture_url as `pictureURL` FROM PLAYLIST WHERE user_id = ?',
     INSERT_INTO_PLAYLIST: 'INSERT INTO PLAYLIST(name, user_id, picture_url) VALUES (?, ?, ?)',
-    FIND_PLAYLIST_SONGS_BY_ID: 'SELECT playlist.playlist_id, playlist.name AS playlist_name, playlist.user_id,' + 
+    ADD_SONG_TO_PLAYLIST: 'INSERT INTO playlist_song(playlist_id, song_id) VALUES (?, ?)',
+
+    FIND_PLAYLIST_SONGS_BY_ID: 'SELECT playlist.playlist_id, playlist.name AS playlist_name, playlist.user_id,' +
     'playlist.picture_url AS playlist_picture_url, songs.song_id, songs.name AS song_name, songs.url,' +
     'album.picture_url AS album_picture_url, artist.artist_id, artist.name AS artist_name FROM PLAYLIST ' +
     'LEFT JOIN PLAYLIST_SONG USING(playlist_id) LEFT JOIN SONGS ON playlist_song.song_id = songs.song_id ' +
@@ -23,7 +25,7 @@ module.exports = Object.freeze({
         'LEFT JOIN ARTIST ON SONG_ARTIST.artist_id = ARTIST.artist_id WHERE SONGS.name LIKE ?',
 
 
-    //Genres   
+    //Genres
 	FIND_ALL_GENRES: 'SELECT * FROM genres',
     FIND_SONGS_BY_GENRE_ID: 'SELECT songs.name as song_name, songs.song_id, songs.url, artist.name as artist_name, ' +
         'artist.artist_id, album.picture_url as album_picture_url FROM SONGS join song_artist sa on ' +
@@ -40,7 +42,7 @@ module.exports = Object.freeze({
 
 
     //ALBUM
-    FIND_ALBUM_SONGS_BY_ID:'SELECT album.album_id, album.name AS album_name, album.picture_url AS album_picture_url,' + 
+    FIND_ALBUM_SONGS_BY_ID:'SELECT album.album_id, album.name AS album_name, album.picture_url AS album_picture_url,' +
     'album.release_date, album.artist_id AS album_artist_id,songs.song_id, songs.name AS song_name, songs.url,' +
     'artist.artist_id, artist.name AS artist_name FROM ALBUM LEFT JOIN SONGS ON album.album_id = songs.album_id ' +
     'LEFT JOIN SONG_ARTIST USING(song_id) LEFT JOIN ARTIST ON song_artist.artist_id = artist.artist_id WHERE album.album_id = ?',

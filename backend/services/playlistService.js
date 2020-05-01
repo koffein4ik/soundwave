@@ -18,6 +18,10 @@ exports.createPlaylist = async function(request_body, user_id, host) {
     return playlist;
 };
 
+exports.addSongToPlaylist = async function(playlistId, songId) {
+    return await databaseService.addSongToPlaylist(playlistId, songId);
+};
+
 
 exports.getPlaylistSongsById = async function(playlist_id){
     const searchResult = await databaseService.getPlaylistSongsById(playlist_id);
