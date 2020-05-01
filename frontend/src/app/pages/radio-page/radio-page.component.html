@@ -6,9 +6,14 @@
                     (onClick)="chooseGenre(i)">
     </app-genre-item>
   </div>
-  <div class="current-chosen-radio-genre-container" *ngIf="currentChosenGenreIndex >= 0">
-    <div class="current-chosen-radio-genre-name-container">
-      {{genres[currentChosenGenreIndex].name}}
-    </div>
+  <div class="current-chosen-radio-genre-wrapper" *ngIf="currentChosenGenreIndex >= 0">
+    <div class="current-chosen-radio-genre-container">
+      <div class="chosen-genre-container"  [style.background-color]="getColor(currentChosenGenreIndex)" >
+        <div class="bubble-">
+          <div class="playing-bubble"></div>
+        </div>
+        <img class="genre-icon" [src]="imgSrc(genres[currentChosenGenreIndex].name)" >
+      </div>
+    </div>`
   </div>
 </div>

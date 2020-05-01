@@ -30,6 +30,10 @@ export class RadioPageComponent implements OnInit {
     return '#' + this.colors[index % this.colors.length];
   }
 
+  imgSrc(name : string): string{
+    return "assets/" + name.replace(" ","").toLowerCase() + ".png";
+  }
+
   public chooseGenre(index: number): void {
     this.genreService.getSongsByGenreId(this.genres[index].genre_id).subscribe(data => {
       console.log(data);
