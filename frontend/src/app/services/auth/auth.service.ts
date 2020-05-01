@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {ConstantsEnum} from "../../constants/ConstantsEnum";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import * as moment from "moment";
 
 @Injectable({
@@ -10,6 +10,9 @@ import * as moment from "moment";
 
 export class AuthService {
   constructor(private http: HttpClient) {}
+
+  public userAuthorized = new BehaviorSubject<any>({});
+  public userAuthorizedObservable$ = this.userAuthorized.asObservable();
 
   private readonly localStorageToken = "token";
   private readonly localStorageExpirationDate = "token_expiration";

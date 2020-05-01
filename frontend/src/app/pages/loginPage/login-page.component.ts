@@ -22,6 +22,7 @@ export class LoginPageComponent implements OnInit {
       this.authService.setToken(data);
       this.loginError = false;
       this.loginSuccess = true;
+      this.authService.userAuthorized.next(true);
     }, error => {
       this.loginSuccess = false;
       this.loginError = true;

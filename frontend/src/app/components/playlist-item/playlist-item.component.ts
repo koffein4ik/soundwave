@@ -43,6 +43,7 @@ export class PlaylistItemComponent implements OnInit, OnChanges {
   constructor() { }
 
   public ngOnInit(): void {
+    this.playlist.pictureURL = "http://" + this.playlist.pictureURL;
     console.log(this.playlist.pictureURL);
   }
 

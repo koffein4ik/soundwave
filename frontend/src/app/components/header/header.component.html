@@ -2,7 +2,10 @@
   <div class="header">
     <app-search></app-search>
     <div class="header-buttons">
-      <button mat-raised-button color="primary" (click)="logOutClick()">
+      <button mat-raised-button color="primary" (click)="logOutClick()" *ngIf="!isUserAuthorized">
+        Log in
+      </button>
+      <button mat-raised-button color="primary" (click)="logOutClick()" *ngIf="isUserAuthorized">
         Log out
       </button>
     </div>

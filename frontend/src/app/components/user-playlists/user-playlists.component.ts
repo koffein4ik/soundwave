@@ -129,6 +129,7 @@ export class UserPlaylistsComponent implements OnInit {
   }
 
   public changeCurrentPlaylistPlaying(newPlaylist: Playlist): void {
+    if (!newPlaylist.songs || newPlaylist.songs.length === 0) return;
     const data = {
       playlist: newPlaylist,
       indexInPlaylist: 0,

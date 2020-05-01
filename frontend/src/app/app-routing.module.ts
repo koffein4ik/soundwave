@@ -9,9 +9,11 @@ import {SearchResultsComponent} from "./components/search-results/search-results
 import {ArtistInfoComponent} from "./pages/artist-info/artist-info.component";
 import {AlbumInfoComponent} from "./pages/album-info/album-info.component";
 import {PlaylistInfoComponent} from "./pages/playlist-info/playlist-info.component";
+import {MainPageComponent} from "./pages/main/main-page.component";
 
 
 const routes: Routes = [
+  {path: '', component: MainPageComponent},
   {path: 'registration', component: RegistrationPageComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'user', component: UserPageComponent},

@@ -18,6 +18,7 @@ import {Playlist} from "../../models/playlist.model";
 import {AuthService} from "../../services/auth/auth.service";
 import {PlayerStateService} from "../../services/player-state/player-state.service";
 import {skip} from "rxjs/operators";
+import {PlaylistService} from "../../services/playlist/playlist.service";
 
 @Component({
   selector: 'app-player',
@@ -41,11 +42,14 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
 
   private clicks = new Subject();
   private subscription: Subscription;
+  private isUserAuthorized: boolean = false;
+  public playlists: Playlist[] = [];
 
   constructor(
     public audioService: AudioService,
     private authService: AuthService,
-    private playerStateService: PlayerStateService
+    private playerStateService: PlayerStateService,
+    private playlistService: PlaylistService
   ) {
     this.audioService.getState().subscribe(state => {
       this.state = state;
@@ -58,6 +62,15 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     this.subscription = this.clicks.pipe(
       throttleTime(400)
     ).subscribe(e => this.toggleDrawer.emit());
+
+    this.authService.userAuthorizedObservable$.pipe(skip(1)).subscribe(data => {
+      this.isUserAuthorized = data;
+      if (this.isUserAuthorized) {
+        this.playlistService.getUserPlaylists().subscribe(data => {
+          this.playlists = data;
+        })
+      }
+    });
 
     this.playerStateService.playPlaylistObservable$.pipe(skip(1)).subscribe((data: {playlist: Playlist, indexInPlaylist: number, sender: string}) => {
       if (data.sender !== this.componentName) {
