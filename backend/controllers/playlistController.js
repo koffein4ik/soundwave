@@ -8,4 +8,4 @@ exports.getPlaylistByUserId = async function(request, response) {
 exports.createPlaylist = async function(request, response) {
     const playlist = await playlistService.createPlaylist(request.body, request.headers.user_id, request.headers.host);
     response.status(201).send(playlist);
-}
+};

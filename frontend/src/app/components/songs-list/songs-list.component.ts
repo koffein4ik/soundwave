@@ -21,7 +21,7 @@ export class SongsListComponent implements OnInit {
   public playlistSongs: Song[] = [
     {
       name: "Now it's perfect",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -32,7 +32,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "4 украинки",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -43,7 +43,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -54,7 +54,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -65,7 +65,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -76,7 +76,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -87,7 +87,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
@@ -98,7 +98,7 @@ export class SongsListComponent implements OnInit {
     },
     {
       name: "саб урбан",
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,

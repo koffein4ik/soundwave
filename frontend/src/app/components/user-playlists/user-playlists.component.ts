@@ -3,6 +3,7 @@ import {Playlist} from 'src/app/models/playlist.model';
 import {Song} from "../../models/song.model";
 import {PlayerStateService} from "../../services/player-state/player-state.service";
 import {skip} from "rxjs/operators";
+import {PlaylistService} from "../../services/playlist/playlist.service";
 
 @Component({
   selector: 'user-playlists',
@@ -14,214 +15,107 @@ export class UserPlaylistsComponent implements OnInit {
   public currentPlaylistPlaying: Playlist;
   public currentPlaylistStopped: boolean = false;
   public componentName: string = "user-playlists";
+  public playlists: Playlist[];
 
   public playlistSongs: Song[] = [
     {
       name: "Now it's perfect",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231,
-      url: "https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3"
+      id: 231, url:"https://ia801504.us.archive.org/3/items/EdSheeranPerfectOfficialMusicVideoListenVid.com/Ed_Sheeran_-_Perfect_Official_Music_Video%5BListenVid.com%5D.mp3",
+      picture_url: ""
     },
     {
       name: "4 украинки",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/9185888.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/9185888.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     },
     {
       name: "саб урбан",
-      picture_url: '',
-      artists: {name: "ширан", artist_id: 123, picture_url: ''},
+      artists: [{name: "ширан", artist_id: 123, picture_url: ''}],
       album: {
         name: "first",
         id: 123,
         pictureURL: "https://avatars.yandex.net/get-music-content/2358262/915e8ce0.a.10263806-1/50x50"
       },
-      id: 231, url: "https://dl2.mp3party.net/online/8711736.mp3"
+      id: 231, url:"https://dl2.mp3party.net/online/8711736.mp3",
+      picture_url: ""
     }
   ];
 
-  playlists: Playlist[] = [
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Последний министр",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2789402/47ea6ff3.a.10219198-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Пыль",
-      pictureURL: "https://avatars.yandex.net/get-music-content/2114230/0c897710.a.9647864-1/200x200",
-      songs: this.playlistSongs
-    },
-    {
-      id: 1,
-      name: "Жить в кайф",
-      pictureURL: "https://avatars.yandex.net/get-music-content/49876/a79d3ed6.a.1683700-1/200x200",
-      songs: this.playlistSongs
-    }
-  ];
-
-  constructor(private playerStateService: PlayerStateService) {
+  constructor(private playerStateService: PlayerStateService, private playlistService: PlaylistService) {
   }
 
   public ngOnInit(): void {
+    this.playlistService.getUserPlaylists().subscribe(playlists => {
+      console.log(playlists);
+      this.playlists = playlists;
+    });
     this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       if (sender !== this.componentName) {
         this.stopCurrentPlaylist(false);

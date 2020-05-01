@@ -4,7 +4,7 @@ module.exports = Object.freeze({
     FIND_USER_BY_NICKNAME: 'SELECT * FROM USERS WHERE nickname = ?',
 
     // PLAYLISTS
-    FIND_PLAYLISTS_BY_USER_ID: 'SELECT name, playlist_id FROM PLAYLIST WHERE user_id = ?',
+    FIND_PLAYLISTS_BY_USER_ID: 'SELECT name, playlist_id, picture_url as `pictureURL` FROM PLAYLIST WHERE user_id = ?',
     INSERT_INTO_PLAYLIST: 'INSERT INTO PLAYLIST(name, user_id, picture_url) VALUES (?, ?, ?)',
 
 

@@ -11,6 +11,7 @@ import {
 } from "@angular/core";
 
 import { Playlist } from 'src/app/models/playlist.model';
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'playlist-item',
@@ -41,7 +42,8 @@ export class PlaylistItemComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    console.log(this.playlist.pictureURL);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -10,6 +10,7 @@ export enum ConstantsEnum {
   getPlaylists = "getplaylists",
   createPlaylist = "createplaylist",
   uploadFile = "upload",
+  uploads = "uploads/",
   genres = "genres",
   getSongsByGenreId = "getsongsbygenreid/",
   getArtistInfoById = "artist/"
