@@ -35,8 +35,8 @@ export class PlaylistService {
       ConstantsEnum.playlistAPIURL + ConstantsEnum.addSongToPlaylist, requestBody);
   }
 
-  public getPlaylistById(playlistId: string): Observable<Playlist> {
-    return this.http.get<Playlist>(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
+  public getPlaylistById(playlistId: string): Observable<any> {
+    return this.http.get<any>(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
       ConstantsEnum.playlistAPIURL + playlistId);
   }
 }

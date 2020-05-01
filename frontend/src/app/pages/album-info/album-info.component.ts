@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {AlbumService} from "../../services/album/album.service";
+import {Album} from "../../models/album.model";
+import {Song} from "../../models/song.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-album-info',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumInfoComponent implements OnInit {
 
-  constructor() { }
+  public album: Album;
+  public songs: Song[];
+
+  constructor(private albumService: AlbumService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.albumService.getAlbumById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
+      this.album = data.album;
+      this.songs = data.songs;
+      console.log(data);
+    })
+
   }
 
 }

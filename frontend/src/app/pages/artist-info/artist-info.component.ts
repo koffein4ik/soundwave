@@ -20,7 +20,6 @@ export class ArtistInfoComponent implements OnInit {
 
   public ngOnInit(): void {
     this.artistService.getArtistInfoById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
-      console.log(data);
       this.artist = data.artist;
       this.albums = data.albums;
       this.songs = data.songs;
