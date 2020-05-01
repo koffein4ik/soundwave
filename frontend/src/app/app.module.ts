@@ -45,6 +45,7 @@ import { AlbumInfoComponent } from './pages/album-info/album-info.component';
 import { PlaylistInfoComponent } from './pages/playlist-info/playlist-info.component';
 import { ItemInfoComponent } from './components/item-info/item-info.component';
 import { MainPageComponent } from './pages/main/main-page.component';
+import { SearchResultsAlbumsComponent } from './components/search-results-albums/search-results-albums.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { MainPageComponent } from './pages/main/main-page.component';
     PlaylistInfoComponent,
     ItemInfoComponent,
     MainPageComponent,
+    SearchResultsAlbumsComponent,
   ],
   imports: [
     BrowserModule,
