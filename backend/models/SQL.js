@@ -9,11 +9,13 @@ module.exports = Object.freeze({
     ADD_SONG_TO_PLAYLIST: 'INSERT INTO playlist_song(playlist_id, song_id) VALUES (?, ?)',
 
     FIND_PLAYLIST_SONGS_BY_ID: 'SELECT playlist.playlist_id, playlist.name AS playlist_name, playlist.user_id,' +
-    'playlist.picture_url AS playlist_picture_url, songs.song_id, songs.name AS song_name, songs.url,' +
+    'playlist.picture_url AS playlist_picture_url, playlist.shared, songs.song_id, songs.name AS song_name, songs.url,' +
     'album.picture_url AS album_picture_url, artist.artist_id, artist.name AS artist_name FROM PLAYLIST ' +
     'LEFT JOIN PLAYLIST_SONG USING(playlist_id) LEFT JOIN SONGS ON playlist_song.song_id = songs.song_id ' +
     'LEFT JOIN ALBUM USING(album_id) LEFT JOIN SONG_ARTIST ON songs.song_id = song_artist.song_id ' +
     'LEFT JOIN ARTIST ON song_artist.artist_id = artist.artist_id WHERE playlist.playlist_id = ?',
+    CHANGE_PLAYLIST_STATE:'UPDATE PLAYLIST SET shared = ? where playlist_id = ?',
+    FIND_PLAYLIST_INFO: 'SELECT playlist.user_id, playlist.shared FROM PLAYLIST WHERE playlist_id = ?',
 
 
     //SEARCH

@@ -53,3 +53,11 @@ exports.getPlaylistSongsById = async function(playlist_id) {
 exports.getAlbumSongsById = async function(album_id) {
     return await executeQuery(sqlQueries.FIND_ALBUM_SONGS_BY_ID, album_id);
 };
+
+exports.changePlaylistState = async function(playlistId, state){
+    return await executeQuery(sqlQueries.CHANGE_PLAYLIST_STATE, [state, playlistId]);
+};
+
+exports.getPlaylistInfo = async function(playlistId){
+    return await executeQuery(sqlQueries.FIND_PLAYLIST_INFO, playlistId)
+}

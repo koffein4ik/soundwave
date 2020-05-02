@@ -5,11 +5,14 @@ const mysql = require('mysql2');
 const app = express();
 const cors = require('cors');
 
+
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
-app.use(express.json({limit: '50mb'}));
+
 
 
 const artistRouter = require('./routers/artistRouter');

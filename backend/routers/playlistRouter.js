@@ -6,5 +6,6 @@ playlistRouter.get("/getplaylists", playlistController.getPlaylistByUserId);
 playlistRouter.post("/createplaylist", playlistController.createPlaylist);
 playlistRouter.post("/addsongtoplaylist", playlistController.addSongToPlaylist);
 playlistRouter.get("/:id", playlistController.getPlaylistSongsById);
+playlistRouter.post("/changeplayliststate", playlistController.changePlaylistState);
 
 module.exports = playlistRouter;

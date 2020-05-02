@@ -11,12 +11,23 @@ exports.createPlaylist = async function(request, response) {
 };
 
 exports.addSongToPlaylist = async function(request, response) {
-  console.log(request.body);
   await playlistService.addSongToPlaylist(request.body.playlistId, request.body.songId);
   response.status(200).send({"ok": "ok"});
 };
 
 exports.getPlaylistSongsById = async function(request, response) {
-    const playlistSongs = await playlistService.getPlaylistSongsById(request.params.id);
-    response.status(200).send(playlistSongs)
+    const playlist = await playlistService.getPlaylistInfo(request.params.id);
+
+    if ((playlist[0].user_id === request.headers.user_id) || (playlist[0].shared == 1)){
+        const playlistSongs = await playlistService.getPlaylistSongsById(request.params.id);
+        response.status(200).send(playlistSongs);
+    } else {
+        response.status(403).json({ message: "Playlist is closed"});
+    }
 };
+
+exports.changePlaylistState = async function(request, response) {
+    const changingResult = await playlistService.changePlaylistState(request.body.playlistId, request.body.state);
+    response.status(200).send(changingResult);
+};
+

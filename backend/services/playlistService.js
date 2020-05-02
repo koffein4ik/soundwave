@@ -31,6 +31,7 @@ exports.getPlaylistSongsById = async function(playlist_id){
         playlist_id: searchResult[0].playlist_id,
         name: searchResult[0].playlist_name,
         user_id: searchResult[0].user_id,
+        shared: searchResult[0].shared,
         picture_url: searchResult[0].playlist_picture_url
     }
     var result = new Object({
@@ -38,4 +39,21 @@ exports.getPlaylistSongsById = async function(playlist_id){
         songs: songsModels
     })
     return result;
+};
+
+
+exports.changePlaylistState = async function(playlistId, state) {
+    var result = '';
+    if ((state == 1) || (state == 0))
+    {
+        await databaseService.changePlaylistState(playlistId, state);
+        result = { message: `Status was changed to ${state}`}
+    } else {        
+        result = { message: "invalid input"};
+    }
+    return result;
+};
+
+exports.getPlaylistInfo = async function(playlistId) {
+    return await databaseService.getPlaylistInfo(playlistId);
 }
