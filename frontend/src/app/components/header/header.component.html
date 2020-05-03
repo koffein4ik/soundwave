@@ -2,12 +2,24 @@
   <div class="header">
     <app-search></app-search>
     <div class="header-buttons">
-      <button mat-raised-button color="primary" (click)="logOutClick()" *ngIf="!isUserAuthorized">
+      <div class="header-element-container" routerLink="/">
+        Main
+      </div>
+      <div class="header-element-container" routerLink="/user" *ngIf="isUserAuthorized">
+        Playlists
+      </div>
+      <div class="header-element-container" routerLink="/radio">
+        Radio
+      </div>
+      <div class="header-element-container" routerLink="/login" *ngIf="!isUserAuthorized">
         Log in
-      </button>
-      <button mat-raised-button color="primary" (click)="logOutClick()" *ngIf="isUserAuthorized">
+      </div>
+      <div class="header-element-container" routerLink="/registration" *ngIf="!isUserAuthorized">
+        Registration
+      </div>
+      <div class="header-element-container" (click)="logOutClick()" *ngIf="isUserAuthorized">
         Log out
-      </button>
+      </div>
     </div>
   </div>
 </div>
