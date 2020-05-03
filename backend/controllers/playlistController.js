@@ -1,4 +1,5 @@
 const playlistService = require("../services/playlistService");
+const recommendationService = require("../services/recommendationService");
 
 exports.getPlaylistByUserId = async function(request, response) {
     const playlists = await playlistService.getPlaylistsByUserId(request.headers.user_id);
@@ -31,3 +32,7 @@ exports.changePlaylistState = async function(request, response) {
     response.status(200).send(changingResult);
 };
 
+exports.getRecommendations = async function(request, response) {
+    const playlistSongs = await recommendationService.getRecommendationPlaylist(request.headers.user_id);
+    response.status(200).send(playlistSongs)
+};

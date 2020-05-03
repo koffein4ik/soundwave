@@ -61,3 +61,7 @@ exports.changePlaylistState = async function(playlistId, state){
 exports.getPlaylistInfo = async function(playlistId){
     return await executeQuery(sqlQueries.FIND_PLAYLIST_INFO, playlistId)
 }
+
+exports.getRecommendation = async function(userId){
+    return await executeQuery("call recommendations(?)",userId)
+}
