@@ -16,8 +16,8 @@ export class PlaylistInfoComponent implements OnInit {
 
   ngOnInit() {
     this.playlistService.getPlaylistById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
-      console.log(data);
       this.playlist = data.playlist;
+      this.playlist.pictureURL = "http://" + this.playlist.pictureURL;
       this.playlist.songs = data.songs;
     })
   }

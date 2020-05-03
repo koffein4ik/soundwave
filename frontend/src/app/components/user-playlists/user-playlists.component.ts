@@ -4,6 +4,7 @@ import {Song} from "../../models/song.model";
 import {PlayerStateService} from "../../services/player-state/player-state.service";
 import {skip} from "rxjs/operators";
 import {PlaylistService} from "../../services/playlist/playlist.service";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'user-playlists',
@@ -22,8 +23,15 @@ export class UserPlaylistsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.playlistService.getUserPlaylists().subscribe(playlists => {
-      console.log(playlists);
       this.playlists = playlists;
+      this.playlists.forEach(playlist => {
+        console.log(playlist);
+        playlist.songs.forEach(song => {
+          song.url = ConstantsEnum.backURL + ConstantsEnum.songs + song.url;
+          song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
+        });
+      });
+      console.log(this.playlists);
     });
     this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
       if (sender !== this.componentName) {

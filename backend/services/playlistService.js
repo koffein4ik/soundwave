@@ -32,7 +32,7 @@ exports.getPlaylistSongsById = async function(playlist_id){
         name: searchResult[0].playlist_name,
         user_id: searchResult[0].user_id,
         shared: searchResult[0].shared,
-        picture_url: searchResult[0].playlist_picture_url
+        pictureURL: searchResult[0].playlist_picture_url
     }
     var result = new Object({
         playlist,
@@ -56,4 +56,4 @@ exports.changePlaylistState = async function(playlistId, state) {
 
 exports.getPlaylistInfo = async function(playlistId) {
     return await databaseService.getPlaylistInfo(playlistId);
-}
+};

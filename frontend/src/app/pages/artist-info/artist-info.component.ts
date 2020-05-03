@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Artist} from "../../models/artist.model";
 import {Album} from "../../models/album.model";
 import {Song} from "../../models/song.model";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'app-artist-info',
@@ -20,9 +21,11 @@ export class ArtistInfoComponent implements OnInit {
 
   public ngOnInit(): void {
     this.artistService.getArtistInfoById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
-      this.artist = data.artist;
-      this.albums = data.albums;
-      this.songs = data.songs;
+      console.log(data);
+      this.artist = data.artistInfo.artist;
+      this.artist.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + "artist/" + this.artist.picture_url;
+      this.albums = data.artistInfo.albums;
+      this.songs = data.artistInfo.songs;
     })
   }
 

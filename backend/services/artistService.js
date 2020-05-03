@@ -12,7 +12,7 @@ exports.getArtistInfo = async function(artistID){
             j++;
             if (searchResult[j].artist_id == artistID){
                 const artist = {
-                    artist_id: artistID,
+                    id: artistID,
                     name: searchResult[j].artist_name,
                     picture_url: searchResult[j].artist_picture_url
                 }
@@ -39,7 +39,7 @@ exports.getArtistInfo = async function(artistID){
             result.albums.push({
                 album_id: searchResult[i].album_id,
                 name: searchResult[i].album_name,
-                picture_url: searchResult[i].album_picture_url,
+                pictureURL: searchResult[i].album_picture_url,
                 songs: songsModels
             });
             songsArray = [];

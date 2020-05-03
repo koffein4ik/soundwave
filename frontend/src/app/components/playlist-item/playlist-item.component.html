@@ -4,7 +4,7 @@
       <mat-icon mat-list-icon>play_circle_filled</mat-icon>
     </button>
     <button mat-button [style.visibility]="hover" (click)="playAnotherPlaylist.emit()" *ngIf="!isCurrentPlaylistPlaying">
-      <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+      <mat-icon mat-list-icon>add</mat-icon>
     </button>
     <button mat-button [style.visibility]="hover" (click)="stopPlaying.emit()" *ngIf="isPlaying && isCurrentPlaylistPlaying">
       <mat-icon mat-list-icon>pause_circle_filled</mat-icon>

@@ -3,6 +3,7 @@ import {AlbumService} from "../../services/album/album.service";
 import {Album} from "../../models/album.model";
 import {Song} from "../../models/song.model";
 import {ActivatedRoute} from "@angular/router";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'app-album-info',
@@ -18,9 +19,10 @@ export class AlbumInfoComponent implements OnInit {
 
   ngOnInit() {
     this.albumService.getAlbumById(this.route.snapshot.paramMap.get('id')).subscribe(data => {
-      this.album = data.album;
-      this.songs = data.songs;
       console.log(data);
+      this.album = data.album;
+      this.album.pictureURL = ConstantsEnum.backURL + ConstantsEnum.images + "album/" + this.album.pictureURL;
+      this.songs = data.songs;
     })
 
   }
