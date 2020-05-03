@@ -12,7 +12,7 @@
   <div class="playlist-info-fields">
     <mat-form-field>
       <mat-label>Name</mat-label>
-      <input matInput name="name" #nameInput ngModel>
+      <input matInput name="name" #nameInput [(ngModel)]="playlistName">
     </mat-form-field>
 
     <button class="save-playlist-button" mat-raised-button color="primary" (click)="onClickSubmit(nameInput.value)">

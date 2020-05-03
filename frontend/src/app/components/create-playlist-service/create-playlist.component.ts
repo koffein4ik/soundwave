@@ -12,6 +12,7 @@ export class CreatePlaylistComponent implements OnInit {
   private fileBase64Encoded: any;
   private base64Background: string | ArrayBuffer;
   private fileReader: FileReader = new FileReader();
+  public playlistName: string = "";
 
   constructor(private playlistService: PlaylistService) { }
 
@@ -40,6 +41,9 @@ export class CreatePlaylistComponent implements OnInit {
 
   public onSuccessCreate():void {
     console.log("Success");
+    this.playlistService.playlistUpdate.next({});
+    this.onFileCanceled();
+    this.playlistName = "";
   }
 
   public onFileChosen(file: File): void {
@@ -48,7 +52,7 @@ export class CreatePlaylistComponent implements OnInit {
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => { 
+    reader.onload = () => {
       this.base64Background = reader.result
     };
   }

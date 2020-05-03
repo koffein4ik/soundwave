@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {ConstantsEnum} from "../../constants/ConstantsEnum";
 import {Playlist} from "../../models/playlist.model";
 
@@ -11,6 +11,9 @@ import {Playlist} from "../../models/playlist.model";
 export class PlaylistService {
   constructor(private http: HttpClient) {
   }
+
+  public playlistUpdate = new BehaviorSubject<any>({});
+  public playlistUpdateObservable$ = this.playlistUpdate.asObservable();
 
   public getUserPlaylists(): Observable<any> {
     return this.http.get(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +

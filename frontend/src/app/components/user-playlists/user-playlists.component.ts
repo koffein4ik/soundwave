@@ -22,6 +22,21 @@ export class UserPlaylistsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.updatePlaylists();
+    this.playlistService.playlistUpdateObservable$.pipe(skip(1)).subscribe(() => this.updatePlaylists());
+    this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
+      if (sender !== this.componentName) {
+        this.stopCurrentPlaylist(false);
+      }
+    });
+    this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
+      if (sender !== this.componentName) {
+        this.playCurrentPlaylist(false);
+      }
+    });
+  }
+
+  public updatePlaylists(): void {
     this.playlistService.getUserPlaylists().subscribe(playlists => {
       this.playlists = playlists;
       this.playlists.forEach(playlist => {
@@ -32,16 +47,6 @@ export class UserPlaylistsComponent implements OnInit {
         });
       });
       console.log(this.playlists);
-    });
-    this.playerStateService.pauseCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
-      if (sender !== this.componentName) {
-        this.stopCurrentPlaylist(false);
-      }
-    });
-    this.playerStateService.resumeCurrentSongObservable$.pipe(skip(1)).subscribe((sender: string) => {
-      if (sender !== this.componentName) {
-        this.playCurrentPlaylist(false);
-      }
     });
   }
 
