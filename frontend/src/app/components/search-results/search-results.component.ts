@@ -30,6 +30,8 @@ export class SearchResultsComponent implements OnInit {
           name: "search results",
           songs: this.searchResults.songs,
           id: 0,
+          shared: 0,
+          userId: -1,
           pictureURL: ''
         };
         this.searchResultsPlaylist.songs.forEach(song => {

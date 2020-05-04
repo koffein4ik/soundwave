@@ -13,6 +13,10 @@
     </div>
   </div>
 
+  <div class="playlist-share-info-container" *ngIf="isPlaylist && isCurrUserOwns">
+    <mat-slide-toggle (change)="toggleChange($event)" [checked]="isPlaylistShared === 1">Share playlist</mat-slide-toggle>
+  </div>
+
   <div class="item-songs-container">
     <app-songs-list [currentPlaylist]="playlist"></app-songs-list>
   </div>

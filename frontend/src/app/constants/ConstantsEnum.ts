@@ -17,4 +17,5 @@ export enum ConstantsEnum {
   getSongsByGenreId = "getsongsbygenreid/",
   getArtistInfoById = "artist/",
   getRecommendations = "recommendations",
+  changePlaylistState = "changeplayliststate"
 }

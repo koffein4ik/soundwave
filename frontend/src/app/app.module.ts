@@ -46,6 +46,7 @@ import { PlaylistInfoComponent } from './pages/playlist-info/playlist-info.compo
 import { ItemInfoComponent } from './components/item-info/item-info.component';
 import { MainPageComponent } from './pages/main/main-page.component';
 import { SearchResultsAlbumsComponent } from './components/search-results-albums/search-results-albums.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { SearchResultsAlbumsComponent } from './components/search-results-albums
     MatSidenavModule,
     MatOptionModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSlideToggleModule
   ],
   providers: [
     {

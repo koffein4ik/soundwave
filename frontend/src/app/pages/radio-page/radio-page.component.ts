@@ -39,6 +39,8 @@ export class RadioPageComponent implements OnInit {
       console.log(data);
       const playlist: Playlist = {
         id: 0,
+        shared: 0,
+        userId: -1,
         name: this.genres[index].name + '-radio',
         songs: this.shuffle(data),
         pictureURL: ''

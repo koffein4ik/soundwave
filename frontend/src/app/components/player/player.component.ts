@@ -19,6 +19,7 @@ import {AuthService} from "../../services/auth/auth.service";
 import {PlayerStateService} from "../../services/player-state/player-state.service";
 import {skip} from "rxjs/operators";
 import {PlaylistService} from "../../services/playlist/playlist.service";
+import {ConstantsEnum} from "../../constants/ConstantsEnum";
 
 @Component({
   selector: 'app-player',
@@ -64,9 +65,14 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     ).subscribe(e => this.toggleDrawer.emit());
     this.isUserAuthorized = this.authService.hasValidToken();
     if (this.isUserAuthorized) {
-      this.playlistService.getUserPlaylists().subscribe(data => {
-        this.playlists = data;
-      })
+      // this.playlistService.getUserPlaylists().subscribe(data => {
+      //   this.playlists = data;
+      //   console.log(this.playlists);
+      // })
+      this.updatePlaylists();
+      this.playlistService.playlistUpdateObservable$.pipe(skip(1)).subscribe(data => {
+        this.updatePlaylists();
+      });
     }
 
     this.authService.userAuthorizedObservable$.pipe(skip(1)).subscribe(data => {
@@ -105,8 +111,26 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     });
   }
 
+  public updatePlaylists(): void {
+    this.playlistService.getUserPlaylists().subscribe(playlists => {
+      this.playlists = playlists;
+      this.playlists.forEach(playlist => {
+        console.log(playlist);
+        playlist.songs.forEach(song => {
+          song.url = ConstantsEnum.backURL + ConstantsEnum.songs + song.url;
+          song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
+        });
+      });
+      console.log(this.playlists);
+    });
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  public isSongPresentsInPlaylist(playlist:Playlist): boolean {
+    return playlist.songs.filter(x => x.id === this.song.id).length > 0;
   }
 
   //TODO REMOVE
@@ -276,6 +300,7 @@ export class PlayerComponent implements OnInit, OnDestroy, OnChanges{
     console.log(this.song);
     this.playlistService.addSongToPlaylist(playlist.id, this.song.id).subscribe(data => {
       alert(`song has been added to the playlist ${playlist.name}`);
+      playlist.songs.push(this.song);
     });
   }
 

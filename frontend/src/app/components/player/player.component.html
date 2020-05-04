@@ -65,12 +65,12 @@
   <div *ngIf="showPlaylist" class="playlists-container">
     <p>Добавить в плейлист</p>
     <div class="playlist-content" *ngFor="let playlist of playlists">
-<!--      <div *ngIf="!playlist.songs.includes(song)">-->
+      <div *ngIf="!isSongPresentsInPlaylist(playlist)">
         <button mat-button (mousedown)="addToSelectedPlaylist(playlist)" type="button">
           <mat-icon>add</mat-icon>
           <span>{{playlist.name}}</span>
         </button>
-<!--      </div>-->
+      </div>
     </div>
   </div>
 

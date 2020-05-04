@@ -34,7 +34,6 @@ export class PlaylistService {
       playlistId: playlistId,
       songId: songId
     };
-    console.log(requestBody)
     return this.http.post(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
       ConstantsEnum.playlistAPIURL + ConstantsEnum.addSongToPlaylist, requestBody);
   }
@@ -47,5 +46,14 @@ export class PlaylistService {
   public getRecomendationPlaylist(): Observable<any> {
     return this.http.get(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
       ConstantsEnum.playlistAPIURL + ConstantsEnum.getRecommendations);
+  }
+
+  public changePlaylistSharedState(newValue: number): Observable<any> {
+    const data = {
+      playlistId: 1,
+      state: newValue
+    };
+    return this.http.post(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
+      ConstantsEnum.playlistAPIURL + ConstantsEnum.changePlaylistState, data);
   }
 }

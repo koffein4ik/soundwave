@@ -30,14 +30,14 @@ exports.getPlaylistSongsById = async function(playlist_id){
     const playlist = {
         playlist_id: searchResult[0].playlist_id,
         name: searchResult[0].playlist_name,
-        user_id: searchResult[0].user_id,
+        userId: searchResult[0].user_id,
         shared: searchResult[0].shared,
         pictureURL: searchResult[0].playlist_picture_url
-    }
+    };
     var result = new Object({
         playlist,
         songs: songsModels
-    })
+    });
     return result;
 };
 

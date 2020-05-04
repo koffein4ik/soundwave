@@ -1,3 +1,8 @@
-<app-item-info [pictureURL]="playlist.pictureURL" [songs]="playlist.songs" [name]="playlist.name" *ngIf="playlist">
-
+<app-item-info [pictureURL]="playlist.pictureURL"
+               [songs]="playlist.songs"
+               [name]="playlist.name"
+               *ngIf="playlist"
+               [isPlaylist]="true"
+               [isPlaylistShared]="playlist.shared"
+               [playlistOwnerId]="playlist.userId">
 </app-item-info>
