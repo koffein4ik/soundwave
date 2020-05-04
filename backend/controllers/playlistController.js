@@ -1,5 +1,6 @@
 const playlistService = require("../services/playlistService");
 const recommendationService = require("../services/recommendationService");
+const songConverter = require('../converters/songConverter');
 
 exports.getPlaylistByUserId = async function(request, response) {
     const playlists = await playlistService.getPlaylistsByUserId(request.headers.user_id);
@@ -40,5 +41,7 @@ exports.changePlaylistState = async function(request, response) {
 
 exports.getRecommendations = async function(request, response) {
     const playlistSongs = await recommendationService.getRecommendationPlaylist(request.headers.user_id);
-    response.status(200).send(playlistSongs)
+    const songsWithArtists = songConverter.getSongsWithArrayOfArtists(playlistSongs[0]);
+    const songsModels = songsWithArtists.map(song => songConverter.convertSong(song));
+    response.status(200).send(songsModels);
 };

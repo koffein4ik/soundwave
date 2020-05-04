@@ -77,8 +77,25 @@ export class UserPlaylistsComponent implements OnInit {
   }
 
   public gerRecommendations(){
-    this.playlistService.getRecomendationPlaylist().subscribe(playlists => {
-      console.log(playlists);
+    this.playlistService.getRecomendationPlaylist().subscribe(data => {
+        data.forEach(song => {
+          song.url = ConstantsEnum.backURL + ConstantsEnum.songs + song.url;
+          song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
+        });
+      const newPlaylist: Playlist = {
+        name: 'recommendation',
+        userId: -1,
+        pictureURL: '',
+        songs: data,
+        shared: 0,
+        id: -1
+      };
+      const dataToPlay = {
+        playlist: newPlaylist,
+        indexInPlaylist: 0,
+        sender: this.componentName
+      };
+      this.playerStateService.playPlaylist.next(dataToPlay);
     });
   }
 }
