@@ -11,6 +11,7 @@ import {Playlist} from "../../models/playlist.model";
 export class PlaylistInfoComponent implements OnInit {
 
   public playlist: Playlist;
+  public error: boolean = false;
 
   constructor(private playlistService: PlaylistService, private route: ActivatedRoute) { }
 
@@ -20,6 +21,8 @@ export class PlaylistInfoComponent implements OnInit {
       this.playlist = data.playlist;
       this.playlist.pictureURL = "http://" + this.playlist.pictureURL;
       this.playlist.songs = data.songs;
+    }, error => {
+      this.error = true;
     })
   }
 
