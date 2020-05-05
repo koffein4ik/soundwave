@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   public loginError: boolean = false;
   public loginSuccess: boolean = false;
@@ -23,6 +24,7 @@ export class LoginPageComponent implements OnInit {
       this.loginError = false;
       this.loginSuccess = true;
       this.authService.userAuthorized.next(true);
+      this.router.navigate(['/']);
     }, error => {
       this.loginSuccess = false;
       this.loginError = true;

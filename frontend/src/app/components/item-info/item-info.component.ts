@@ -45,11 +45,6 @@ export class ItemInfoComponent implements OnInit{
       song.url = ConstantsEnum.backURL + ConstantsEnum.songs + song.url;
       song.picture_url = ConstantsEnum.backURL + ConstantsEnum.images + ConstantsEnum.songs + song.picture_url;
     });
-    if(this.albums) {
-      this.albums.forEach(album => {
-        album.pictureURL = ConstantsEnum.backURL + ConstantsEnum.images + "album/" + album.pictureURL;
-      });
-    }
     console.log(this.pictureURL);
     this.playlist =  {
       id: 0,
