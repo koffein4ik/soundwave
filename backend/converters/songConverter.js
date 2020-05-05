@@ -16,7 +16,7 @@ exports.convertSong = function (song) {
 exports.getSongsWithArrayOfArtists = function (results) {
     const songModels = [];
     let currentSongModel = results[0];
-    if (!currentSongModel) return songModels;
+    if (!currentSongModel || !currentSongModel.song_id) return songModels;
     currentSongModel.artists = [];
     currentSongModel.artists.push({
         name: results[0].artist_name,

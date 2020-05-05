@@ -11,7 +11,7 @@ exports.getAlbumSongsById = async function(album_id){
         name: searchResult[0].album_name,
         artist_id: searchResult[0].album_artist_id,
         release_date: searchResult[0].release_date,
-        pictureUrl: searchResult[0].album_picture_url
+        pictureURL: searchResult[0].album_picture_url
     }
     var result = new Object({
         album,
