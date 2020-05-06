@@ -1,4 +1,4 @@
-<div class="error-container" *ngIf="error">ERROR</div>
+<div class="error-container" *ngIf="protectedPlaylist"><span>You dont have access to this playlist</span></div>
 <app-item-info [pictureURL]="playlist.pictureURL"
                [songs]="playlist.songs"
                [name]="playlist.name"

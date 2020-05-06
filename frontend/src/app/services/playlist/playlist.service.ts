@@ -48,9 +48,9 @@ export class PlaylistService {
       ConstantsEnum.playlistAPIURL + ConstantsEnum.getRecommendations);
   }
 
-  public changePlaylistSharedState(newValue: number): Observable<any> {
+  public changePlaylistSharedState(playlistId: number, newValue: number): Observable<any> {
     const data = {
-      playlistId: 1,
+      playlistId: playlistId,
       state: newValue
     };
     return this.http.post(ConstantsEnum.backURL + ConstantsEnum.userAPIURL +
